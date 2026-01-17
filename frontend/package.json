@@ -8,9 +8,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "electron": "electron .",
-    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
-    "electron:build": "vite build && electron-builder",
+    "electron:compile": "tsc -p electron/tsconfig.json",
+    "electron": "npm run electron:compile && electron .",
+    "electron:dev": "npm run electron:compile && concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "electron:build": "npm run electron:compile && vite build && electron-builder",
     "test": "vitest",
     "lint": "eslint src --ext ts,tsx"
   },

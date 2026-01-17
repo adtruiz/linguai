@@ -1,4 +1,5 @@
 import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -24,7 +25,6 @@ function createWindow() {
     show: false,
   });
 
-  // Show window when ready
   mainWindow.once('ready-to-show', () => {
     mainWindow?.show();
   });
@@ -41,7 +41,7 @@ function createWindow() {
   });
 }
 
-// File dialog handler
+// File dialog handlers
 ipcMain.handle('dialog:openFile', async () => {
   const result = await dialog.showOpenDialog({
     properties: ['openFile'],
@@ -63,6 +63,34 @@ ipcMain.handle('dialog:saveFile', async (_event, defaultPath?: string) => {
     ],
   });
   return result;
+});
+
+// File read/write handlers
+ipcMain.handle('file:read', async (_event, filePath: string) => {
+  const buffer = await readFile(filePath);
+  const fileName = path.basename(filePath);
+  const ext = path.extname(filePath).toLowerCase();
+
+  // Determine MIME type
+  const mimeTypes: Record<string, string> = {
+    '.wav': 'audio/wav',
+    '.mp3': 'audio/mpeg',
+    '.flac': 'audio/flac',
+    '.ogg': 'audio/ogg',
+    '.m4a': 'audio/mp4',
+  };
+  const mimeType = mimeTypes[ext] || 'application/octet-stream';
+
+  return {
+    data: buffer.toString('base64'),
+    fileName,
+    mimeType,
+  };
+});
+
+ipcMain.handle('file:write', async (_event, filePath: string, content: string) => {
+  await writeFile(filePath, content, 'utf-8');
+  return { success: true };
 });
 
 app.whenReady().then(createWindow);
