@@ -13,13 +13,11 @@ async def health_check():
 
 @router.get("/health/ready")
 async def readiness_check():
-    """Readiness check - verifies dependencies are available"""
+    """Readiness check - verifies core dependencies are available"""
     checks = {
         "parselmouth": False,
-        "database": False,  # TODO: Implement
     }
 
-    # Check Parselmouth
     try:
         import parselmouth
         checks["parselmouth"] = True
