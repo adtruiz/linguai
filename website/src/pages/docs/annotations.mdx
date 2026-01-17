@@ -1,0 +1,196 @@
+---
+layout: '../../layouts/DocsLayout.astro'
+title: 'Annotations'
+description: 'Create, edit, and export phonetic annotations in LinguAI'
+---
+
+# Annotations
+
+LinguAI provides flexible annotation tools compatible with Praat TextGrid format, plus AI-powered automatic annotation for Pro users.
+
+## Annotation Tiers
+
+Annotations are organized into **tiers**, similar to Praat's TextGrid:
+
+- **Interval tiers** - Segments with start/end times (words, phonemes)
+- **Point tiers** - Single time points (events, markers)
+
+### Creating Tiers
+
+1. Click **+ Add Tier** in the annotation panel
+2. Choose **Interval** or **Point** tier
+3. Name your tier (e.g., "words", "phonemes", "notes")
+
+### Managing Tiers
+
+- **Reorder** - Drag tiers up/down
+- **Rename** - Double-click the tier name
+- **Delete** - Right-click > Delete tier
+- **Hide/Show** - Click the eye icon
+
+## Creating Annotations
+
+### Manual Annotation
+
+1. Select a tier by clicking on it
+2. **Interval tier:** Click and drag on the waveform to create a segment
+3. **Point tier:** Click once to add a point
+4. Type your label and press `Enter`
+
+### Quick Annotation Mode
+
+Press `A` to enable quick annotation mode:
+1. Click the start point
+2. Click the end point
+3. Type your label
+4. Repeat without needing to press `A` again
+
+Press `Escape` to exit quick annotation mode.
+
+## Editing Annotations
+
+### Selecting
+
+- **Single click** - Select one annotation
+- **Shift+click** - Add to selection
+- **Ctrl/Cmd+A** - Select all in tier
+
+### Moving Boundaries
+
+- **Drag** a boundary to adjust timing
+- **Hold Shift** while dragging for fine control
+- **Double-click** a boundary to split/merge
+
+### Editing Labels
+
+- **Double-click** the annotation to edit
+- **Tab** moves to next annotation
+- **Shift+Tab** moves to previous
+
+### Deleting
+
+- **Backspace/Delete** removes selected annotations
+- **Ctrl/Cmd+Z** to undo
+
+## AI Auto-Annotation (Pro)
+
+Pro users can automatically generate annotations using AI:
+
+### Phoneme Detection
+
+1. Select a region (or entire file)
+2. Click **AI > Detect Phonemes**
+3. Choose your phoneme set:
+   - IPA (International Phonetic Alphabet)
+   - ARPABET (for English)
+   - SAMPA
+4. Review and adjust the results
+
+### Word Segmentation
+
+1. Select a region
+2. Click **AI > Detect Words**
+3. If available, add a transcript for better accuracy
+4. The AI aligns words to the audio
+
+### Speaker Detection
+
+1. Click **AI > Detect Speakers**
+2. The AI identifies different speakers
+3. Results appear on a new "speakers" tier
+
+> **Note:** AI annotations are suggestions. Always review and correct as needed.
+
+## TextGrid Compatibility
+
+LinguAI fully supports Praat TextGrid format:
+
+### Importing TextGrids
+
+1. **File > Import > TextGrid**
+2. Select your `.TextGrid` file
+3. If needed, select the corresponding audio
+
+All tiers and annotations are preserved exactly.
+
+### Exporting TextGrids
+
+1. **File > Export > TextGrid**
+2. Choose:
+   - **Short format** (compact)
+   - **Long format** (human-readable)
+3. The exported file works in Praat
+
+## Other Export Formats
+
+### CSV Export
+
+Export annotations as spreadsheet-compatible CSV:
+
+```
+tier,label,start,end
+phonemes,b,0.123,0.189
+phonemes,ɛ,0.189,0.267
+```
+
+### ELAN Export
+
+Export to ELAN format (`.eaf`) for multimedia annotation workflows.
+
+### JSON Export
+
+Export to JSON for programmatic access:
+
+```json
+{
+  "tiers": [
+    {
+      "name": "phonemes",
+      "type": "interval",
+      "entries": [
+        {"label": "b", "start": 0.123, "end": 0.189},
+        {"label": "ɛ", "start": 0.189, "end": 0.267}
+      ]
+    }
+  ]
+}
+```
+
+## IPA Keyboard
+
+LinguAI includes a built-in IPA keyboard:
+
+1. Press `Ctrl/Cmd+Shift+I` or click the IPA button
+2. Click symbols to insert them
+3. Common symbols have keyboard shortcuts:
+   - `@` → ə (schwa)
+   - `E` → ɛ (open-mid front)
+   - `O` → ɔ (open-mid back)
+   - `I` → ɪ (near-close front)
+
+## Keyboard Shortcuts
+
+| Action | Shortcut |
+|--------|----------|
+| New annotation | `A` |
+| Edit selected | `Enter` |
+| Delete selected | `Backspace` |
+| Select all in tier | `Ctrl/Cmd+A` |
+| Next annotation | `Tab` |
+| Previous annotation | `Shift+Tab` |
+| IPA keyboard | `Ctrl/Cmd+Shift+I` |
+| Merge selected | `M` |
+| Split at cursor | `S` |
+
+## Tips for Efficient Annotation
+
+1. **Use AI as a starting point** - Let AI do the first pass, then correct
+2. **Create keyboard shortcuts** for frequent labels
+3. **Use multiple tiers** for different annotation levels
+4. **Save frequently** - LinguAI auto-saves, but manual saves don't hurt
+5. **Export regularly** to TextGrid for backup compatibility
+
+## Next Steps
+
+- [Learn about spectrogram analysis](/docs/spectrogram)
+- [Explore collaboration features](/docs/collaboration) (Pro)

@@ -1,0 +1,135 @@
+---
+layout: '../../layouts/DocsLayout.astro'
+title: 'Spectrogram Analysis'
+description: 'Learn how to view, analyze, and export spectrograms in LinguAI'
+---
+
+# Spectrogram Analysis
+
+LinguAI provides powerful spectrogram visualization built on the same algorithms as Praat (via Parselmouth), with a modern interface designed for efficiency.
+
+## Understanding the Display
+
+When you open an audio file, LinguAI shows three main panels:
+
+1. **Waveform** (top) - The audio amplitude over time
+2. **Spectrogram** (middle) - Frequency content over time
+3. **Annotations** (bottom) - Your labels and transcriptions
+
+## Spectrogram Settings
+
+Access spectrogram settings via **View > Spectrogram Settings** or press `S`.
+
+### Frequency Range
+
+- **Default:** 0-5000 Hz (suitable for most speech)
+- **Extended:** 0-8000 Hz (for high-frequency analysis)
+- **Custom:** Set your own min/max values
+
+### Window Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| Window length | 0.005s | Time resolution (shorter = better time resolution) |
+| Dynamic range | 70 dB | Contrast of the display |
+| Pre-emphasis | 6 dB/oct | High-frequency boost |
+
+### Color Schemes
+
+- **Grayscale** - Classic Praat-style
+- **Heat** - Warm colors for intensity
+- **Viridis** - Perceptually uniform (recommended)
+- **Custom** - Define your own gradient
+
+## Formant Tracking
+
+LinguAI can overlay formant tracks on your spectrogram:
+
+1. Click the **Formants** toggle in the toolbar
+2. Formants F1-F4 are displayed as colored lines
+3. Click on a formant to see its exact value
+
+### Formant Settings
+
+- **Number of formants:** 5 (default)
+- **Maximum frequency:** 5500 Hz (males) / 5500 Hz (females)
+- **Window length:** 0.025s
+
+## Pitch Tracking
+
+Display the fundamental frequency (F0):
+
+1. Enable **Pitch** in the toolbar
+2. The pitch contour appears as a blue line
+3. Hover over any point to see the exact Hz value
+
+### Pitch Settings
+
+- **Range:** 75-500 Hz (adjustable for different speakers)
+- **Method:** Autocorrelation (default) or Cross-correlation
+
+## Intensity Display
+
+Show the intensity contour alongside pitch:
+
+1. Enable **Intensity** in the toolbar
+2. A green line shows dB levels
+3. Useful for stress and prominence analysis
+
+## Measuring Formants and Pitch
+
+### Point Measurements
+
+1. Click anywhere on the spectrogram
+2. A info panel shows:
+   - Time position
+   - Formant values (F1, F2, F3, F4)
+   - Pitch (if voiced)
+   - Intensity
+
+### Selection Measurements
+
+1. Click and drag to select a region
+2. The panel shows averages for the selection:
+   - Mean formant values
+   - Mean pitch and range
+   - Mean intensity
+
+## Exporting Data
+
+### Export Measurements
+
+Go to **File > Export > Measurements** to save:
+- Point measurements as CSV
+- Selection measurements as CSV
+- Formant tracks as Table
+
+### Export Images
+
+Right-click on the spectrogram and choose:
+- **Copy Image** - To clipboard
+- **Save Image** - PNG, SVG, or PDF
+- **Save with Annotations** - Include labels
+
+## Tips for Better Analysis
+
+1. **Adjust dynamic range** if the spectrogram looks too light or dark
+2. **Use formant tracking** with caution - always verify visually
+3. **Enable pitch** only when analyzing tonal features
+4. **Zoom in** for detailed phonetic analysis (use scroll wheel)
+
+## Keyboard Shortcuts
+
+| Action | Shortcut |
+|--------|----------|
+| Toggle formants | `F` |
+| Toggle pitch | `P` |
+| Toggle intensity | `I` |
+| Spectrogram settings | `S` |
+| Zoom to selection | `Z` |
+| Reset zoom | `0` |
+
+## Next Steps
+
+- [Learn about annotations](/docs/annotations)
+- [Explore AI auto-detection](/docs/ai-features)

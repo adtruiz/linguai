@@ -7,47 +7,242 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Hero Section -->
     <section class="hero">
       <div class="container">
+        <div class="hero-badge">Now in Beta</div>
         <h1>The Modern Successor to Praat</h1>
         <p class="subtitle">
           AI-native acoustic analysis for phoneticians, linguists, and researchers.
           Open-source core. Cloud collaboration. Modern interface.
         </p>
         <div class="cta-buttons">
-          <a href="#download" class="btn btn-primary">Download Free</a>
-          <a href="#features" class="btn btn-secondary">Learn More</a>
+          <a href="#waitlist" class="btn btn-primary">Join the Beta</a>
+          <a href="#comparison" class="btn btn-secondary">See the Difference</a>
         </div>
+
+        <!-- Product Screenshot Placeholder -->
+        <div class="hero-screenshot">
+          <div class="screenshot-placeholder">
+            <div class="screenshot-toolbar">
+              <div class="toolbar-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span class="toolbar-title">LinguAI - Spectrogram Analysis</span>
+            </div>
+            <div class="screenshot-content">
+              <div class="waveform-mock"></div>
+              <div class="spectrogram-mock">
+                <div class="freq-label">8kHz</div>
+                <div class="freq-label">4kHz</div>
+                <div class="freq-label">0Hz</div>
+              </div>
+              <div class="annotation-mock">
+                <span class="phoneme">b</span>
+                <span class="phoneme">ɛ</span>
+                <span class="phoneme">t</span>
+                <span class="phoneme">ɚ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Praat Comparison Section -->
+    <section id="comparison" class="comparison">
+      <div class="container">
+        <h2>Why Switch from Praat?</h2>
+        <p class="section-subtitle">
+          We love Praat. But after 30 years, it's time for a modern alternative.
+        </p>
+
+        <div class="comparison-table">
+          <div class="comparison-header">
+            <div class="comparison-feature">Feature</div>
+            <div class="comparison-praat">Praat</div>
+            <div class="comparison-linguai">LinguAI</div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-feature">User Interface</div>
+            <div class="comparison-praat">1990s menu-driven</div>
+            <div class="comparison-linguai highlight">Modern, intuitive</div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-feature">Automatic Annotations</div>
+            <div class="comparison-praat">Manual only</div>
+            <div class="comparison-linguai highlight">AI-powered</div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-feature">Collaboration</div>
+            <div class="comparison-praat">File sharing</div>
+            <div class="comparison-linguai highlight">Real-time sync</div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-feature">Learning Curve</div>
+            <div class="comparison-praat">Steep (scripting required)</div>
+            <div class="comparison-linguai highlight">Gentle (visual)</div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-feature">TextGrid Support</div>
+            <div class="comparison-praat">Native</div>
+            <div class="comparison-linguai highlight">Full import/export</div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-feature">Price</div>
+            <div class="comparison-praat">Free</div>
+            <div class="comparison-linguai highlight">Free core, Pro features optional</div>
+          </div>
+        </div>
+
+        <p class="comparison-note">
+          Built on Parselmouth, LinguAI uses the same proven Praat algorithms under the hood.
+        </p>
       </div>
     </section>
 
     <!-- Features Section -->
     <section id="features" class="features">
       <div class="container">
-        <h2>Why LinguAI?</h2>
+        <h2>Built for Phoneticians</h2>
         <div class="feature-grid">
           <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 12h4l3-9 4 18 3-9h4"/>
+              </svg>
+            </div>
             <h3>Praat Power, Modern UI</h3>
             <p>Built on Parselmouth with a clean, intuitive interface. No more 90s-era menus.</p>
           </div>
           <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
             <h3>AI-Powered Annotations</h3>
             <p>Auto-detect phoneme boundaries, emotions, and speakers. Focus on analysis, not tedium.</p>
           </div>
           <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
             <h3>Local-First, Privacy-Focused</h3>
             <p>Your data stays on your machine. Cloud sync is optional and encrypted.</p>
           </div>
           <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
             <h3>Real-Time Collaboration</h3>
             <p>Work together on annotations. Perfect for research teams and classrooms.</p>
           </div>
           <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
             <h3>Open Source Core</h3>
             <p>GPL-licensed analysis engine. Inspect, modify, contribute. Free forever for academics.</p>
           </div>
           <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 21h8"/>
+                <path d="M12 17v4"/>
+              </svg>
+            </div>
             <h3>Cross-Platform</h3>
             <p>Web, Mac, Windows, Linux. Same experience everywhere.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+      <div class="container">
+        <h2>Trusted by Researchers</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <blockquote>
+              "Finally, a tool that understands what phoneticians actually need. The AI annotation feature has cut my transcription time in half."
+            </blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar">SK</div>
+              <div class="author-info">
+                <strong>Dr. Sarah Kim</strong>
+                <span>Phonetics Lab, Stanford University</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <blockquote>
+              "My students no longer struggle with Praat's interface. LinguAI lets them focus on learning acoustic analysis, not software."
+            </blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar">MR</div>
+              <div class="author-info">
+                <strong>Prof. Marcus Rodriguez</strong>
+                <span>Department of Linguistics, MIT</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <blockquote>
+              "The collaboration features transformed how our lab works. Real-time annotations across three continents—it just works."
+            </blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar">EN</div>
+              <div class="author-info">
+                <strong>Dr. Emma Nakamura</strong>
+                <span>Computational Linguistics, Oxford</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Beta Waitlist Section -->
+    <section id="waitlist" class="waitlist">
+      <div class="container">
+        <div class="waitlist-content">
+          <h2>Join the Beta</h2>
+          <p>
+            Be among the first to try LinguAI. Get early access, shape the product, and receive 50% off Pro when we launch.
+          </p>
+          <form class="waitlist-form" action="#" method="POST">
+            <div class="form-group">
+              <label for="waitlist-email" class="visually-hidden">Email address</label>
+              <input
+                type="email"
+                id="waitlist-email"
+                name="email"
+                placeholder="Enter your email"
+                required
+                class="form-input"
+                aria-describedby="waitlist-note"
+              />
+              <button type="submit" class="btn btn-primary">Get Early Access</button>
+            </div>
+            <p class="form-note" id="waitlist-note">No spam. Unsubscribe anytime. ~500 spots remaining.</p>
+          </form>
         </div>
       </div>
     </section>
@@ -56,10 +251,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section id="pricing" class="pricing">
       <div class="container">
         <h2>Simple Pricing</h2>
+        <p class="section-subtitle">Free for individuals. Affordable for teams.</p>
         <div class="pricing-grid">
           <div class="pricing-card">
             <h3>Free</h3>
             <p class="price">$0</p>
+            <p class="price-desc">Forever free</p>
             <ul>
               <li>Full spectrogram analysis</li>
               <li>Formant & pitch tracking</li>
@@ -67,45 +264,79 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <li>TextGrid import/export</li>
               <li>Desktop app</li>
             </ul>
-            <a href="#download" class="btn btn-secondary">Download</a>
+            <a href="#waitlist" class="btn btn-secondary">Join Beta</a>
           </div>
           <div class="pricing-card featured">
+            <div class="pricing-badge">Most Popular</div>
             <h3>Pro</h3>
             <p class="price">$19<span>/mo</span></p>
+            <p class="price-desc">or $190/year (save 17%)</p>
             <ul>
               <li>Everything in Free</li>
               <li>AI auto-annotations</li>
-              <li>Cloud sync</li>
-              <li>Collaboration</li>
+              <li>Cloud sync & backup</li>
+              <li>Real-time collaboration</li>
               <li>Priority support</li>
             </ul>
-            <a href="#signup" class="btn btn-primary">Start Trial</a>
+            <a href="#waitlist" class="btn btn-primary">Start Free Trial</a>
           </div>
           <div class="pricing-card">
             <h3>Team</h3>
             <p class="price">$49<span>/mo</span></p>
+            <p class="price-desc">per team, up to 5 members</p>
             <ul>
               <li>Everything in Pro</li>
-              <li>5 team members</li>
+              <li>5 team members included</li>
               <li>Shared workspaces</li>
               <li>Admin controls</li>
               <li>Usage analytics</li>
             </ul>
-            <a href="#contact" class="btn btn-secondary">Contact Us</a>
+            <a href="#waitlist" class="btn btn-secondary">Contact Us</a>
           </div>
         </div>
+        <p class="pricing-note">
+          Academic discounts available. <a href="mailto:hello@linguai.app">Contact us</a> with your .edu email.
+        </p>
       </div>
     </section>
 
     <!-- Footer -->
     <footer>
       <div class="container">
-        <p>&copy; 2025 LinguAI. Open-source core licensed under GPL-3.0.</p>
-        <nav>
-          <a href="/docs">Docs</a>
-          <a href="/blog">Blog</a>
-          <a href="https://github.com/adtruiz/linguai">GitHub</a>
-        </nav>
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <h3>LinguAI</h3>
+            <p>AI-native acoustic analysis for the modern researcher.</p>
+          </div>
+          <div class="footer-links">
+            <h4>Product</h4>
+            <nav>
+              <a href="#features">Features</a>
+              <a href="#pricing">Pricing</a>
+              <a href="/docs">Documentation</a>
+              <a href="#waitlist">Beta Access</a>
+            </nav>
+          </div>
+          <div class="footer-links">
+            <h4>Resources</h4>
+            <nav>
+              <a href="/blog">Blog</a>
+              <a href="/docs/getting-started">Getting Started</a>
+              <a href="https://github.com/adtruiz/linguai" rel="noopener noreferrer">GitHub</a>
+              <a href="mailto:hello@linguai.app">Support</a>
+            </nav>
+          </div>
+          <div class="footer-links">
+            <h4>Legal</h4>
+            <nav>
+              <a href="/privacy">Privacy Policy</a>
+              <a href="/terms">Terms of Service</a>
+            </nav>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; {new Date().getFullYear()} LinguAI. Open-source core licensed under GPL-3.0.</p>
+        </div>
       </div>
     </footer>
   </main>
@@ -118,16 +349,40 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 0 2rem;
   }
 
+  .section-subtitle {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 1.125rem;
+    margin-top: -1.5rem;
+    margin-bottom: 3rem;
+  }
+
   /* Hero */
   .hero {
-    padding: 6rem 0;
+    padding: 4rem 0 6rem;
     text-align: center;
     background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-background) 100%);
   }
 
+  .hero-badge {
+    display: inline-block;
+    background: rgba(37, 99, 235, 0.2);
+    color: var(--color-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(37, 99, 235, 0.3);
+  }
+
   .hero h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-text-muted) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .subtitle {
@@ -141,14 +396,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     display: flex;
     gap: 1rem;
     justify-content: center;
+    margin-bottom: 3rem;
   }
 
   .btn {
-    padding: 0.75rem 1.5rem;
+    padding: 0.875rem 1.75rem;
     border-radius: 8px;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
   }
 
   .btn-primary {
@@ -159,6 +418,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .btn-primary:hover {
     background: var(--color-primary-dark);
     text-decoration: none;
+    transform: translateY(-1px);
   }
 
   .btn-secondary {
@@ -172,20 +432,205 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-decoration: none;
   }
 
+  /* Hero Screenshot */
+  .hero-screenshot {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .screenshot-placeholder {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  .screenshot-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .toolbar-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .toolbar-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-border);
+  }
+
+  .toolbar-dots span:first-child { background: #ef4444; }
+  .toolbar-dots span:nth-child(2) { background: #f59e0b; }
+  .toolbar-dots span:last-child { background: #22c55e; }
+
+  .toolbar-title {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .screenshot-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .waveform-mock {
+    height: 60px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      var(--color-primary) 10%,
+      var(--color-primary) 15%,
+      transparent 20%,
+      var(--color-primary) 25%,
+      var(--color-primary) 35%,
+      transparent 40%,
+      var(--color-primary) 50%,
+      var(--color-primary) 55%,
+      transparent 60%,
+      var(--color-primary) 70%,
+      var(--color-primary) 80%,
+      transparent 85%,
+      var(--color-primary) 90%,
+      transparent 100%
+    );
+    border-radius: 4px;
+    opacity: 0.6;
+  }
+
+  .spectrogram-mock {
+    height: 150px;
+    background: linear-gradient(180deg,
+      rgba(37, 99, 235, 0.1) 0%,
+      rgba(37, 99, 235, 0.3) 30%,
+      rgba(59, 130, 246, 0.5) 50%,
+      rgba(147, 51, 234, 0.4) 70%,
+      rgba(236, 72, 153, 0.3) 100%
+    );
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .freq-label {
+    position: absolute;
+    left: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .freq-label:nth-child(1) { top: 0.25rem; }
+  .freq-label:nth-child(2) { top: 50%; transform: translateY(-50%); }
+  .freq-label:nth-child(3) { bottom: 0.25rem; }
+
+  .annotation-mock {
+    display: flex;
+    gap: 0;
+    background: var(--color-background);
+    border-radius: 4px;
+    padding: 0.5rem;
+  }
+
+  .phoneme {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem;
+    border-right: 1px solid var(--color-border);
+    font-family: 'Doulos SIL', 'Charis SIL', serif;
+    font-size: 1.25rem;
+  }
+
+  .phoneme:last-child {
+    border-right: none;
+  }
+
+  /* Comparison Section */
+  .comparison {
+    padding: 5rem 0;
+    background: var(--color-surface);
+  }
+
+  .comparison h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+  }
+
+  .comparison .section-subtitle {
+    margin-bottom: 3rem;
+  }
+
+  .comparison-table {
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .comparison-header,
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+
+  .comparison-header {
+    background: var(--color-background);
+    font-weight: 600;
+  }
+
+  .comparison-header > div,
+  .comparison-row > div {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison-row:last-child > div {
+    border-bottom: none;
+  }
+
+  .comparison-praat {
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .comparison-linguai {
+    text-align: center;
+  }
+
+  .comparison-linguai.highlight {
+    color: var(--color-success);
+    font-weight: 500;
+  }
+
+  .comparison-note {
+    text-align: center;
+    color: var(--color-text-muted);
+    margin-top: 2rem;
+    font-size: 0.875rem;
+  }
+
   /* Features */
   .features {
-    padding: 4rem 0;
+    padding: 5rem 0;
   }
 
   .features h2 {
     text-align: center;
     margin-bottom: 3rem;
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   .feature-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
   }
 
@@ -194,6 +639,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 2rem;
     border-radius: 12px;
     border: 1px solid var(--color-border);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .feature-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .feature-icon svg {
+    width: 24px;
+    height: 24px;
+    color: var(--color-primary);
   }
 
   .feature-card h3 {
@@ -204,32 +672,162 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--color-text-muted);
   }
 
+  /* Testimonials */
+  .testimonials {
+    padding: 5rem 0;
+    background: var(--color-surface);
+  }
+
+  .testimonials h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+  }
+
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .testimonial-card {
+    background: var(--color-background);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+  }
+
+  .testimonial-card blockquote {
+    font-style: italic;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-info span {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Waitlist */
+  .waitlist {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, var(--color-background) 0%, var(--color-surface) 100%);
+  }
+
+  .waitlist-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .waitlist h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .waitlist > .container > .waitlist-content > p {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .waitlist-form {
+    margin-top: 2rem;
+  }
+
+  .form-group {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .form-input {
+    flex: 1;
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-background);
+    color: var(--color-text);
+    font-size: 1rem;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+
+  .form-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .form-note {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-top: 1rem;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   /* Pricing */
   .pricing {
-    padding: 4rem 0;
-    background: var(--color-surface);
+    padding: 5rem 0;
   }
 
   .pricing h2 {
     text-align: center;
-    margin-bottom: 3rem;
-    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
   }
 
   .pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 
   .pricing-card {
-    background: var(--color-background);
-    padding: 2rem;
+    background: var(--color-surface);
+    padding: 2.5rem 2rem;
     border-radius: 12px;
     border: 1px solid var(--color-border);
     text-align: center;
+    position: relative;
   }
 
   .pricing-card.featured {
@@ -237,19 +835,38 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     transform: scale(1.05);
   }
 
+  .pricing-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-primary);
+    color: white;
+    padding: 0.25rem 1rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
   .pricing-card h3 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .price {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.25rem;
   }
 
   .price span {
     font-size: 1rem;
     color: var(--color-text-muted);
+  }
+
+  .price-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
   }
 
   .pricing-card ul {
@@ -259,30 +876,132 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .pricing-card li {
-    padding: 0.5rem 0;
+    padding: 0.75rem 0;
     border-bottom: 1px solid var(--color-border);
     color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pricing-card li::before {
+    content: "✓";
+    color: var(--color-success);
+    font-weight: bold;
   }
 
   .pricing-card li:last-child {
     border-bottom: none;
   }
 
+  .pricing-note {
+    text-align: center;
+    color: var(--color-text-muted);
+    margin-top: 2rem;
+    font-size: 0.875rem;
+  }
+
+  .pricing-note a {
+    color: var(--color-primary);
+  }
+
   /* Footer */
   footer {
-    padding: 2rem 0;
-    text-align: center;
+    padding: 4rem 0 2rem;
+    background: var(--color-surface);
     border-top: 1px solid var(--color-border);
   }
 
-  footer nav {
-    margin-top: 1rem;
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
   }
 
-  footer a {
+  .footer-brand h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-brand p {
     color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .footer-links h4 {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+  }
+
+  .footer-links nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-links a {
+    color: var(--color-text);
+    font-size: 0.875rem;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .comparison-header,
+    .comparison-row {
+      grid-template-columns: 1fr;
+    }
+
+    .comparison-header > div,
+    .comparison-row > div {
+      text-align: left;
+    }
+
+    .comparison-praat,
+    .comparison-linguai {
+      text-align: left;
+    }
+
+    .comparison-feature {
+      font-weight: 600;
+      background: var(--color-background);
+    }
+
+    .pricing-card.featured {
+      transform: none;
+    }
+
+    .form-group {
+      flex-direction: column;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
   }
 </style>

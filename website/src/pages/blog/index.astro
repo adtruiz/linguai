@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout title="Blog | LinguAI" description="Insights, tutorials, and updates from the LinguAI team">
+  <div class="blog-list">
+    <header class="blog-list-header">
+      <div class="container">
+        <a href="/" class="back-link">&larr; Back to Home</a>
+        <h1>Blog</h1>
+        <p class="subtitle">
+          Insights on acoustic analysis, phonetics research, and product updates from the LinguAI team.
+        </p>
+      </div>
+    </header>
+
+    <main class="blog-list-content">
+      <div class="container">
+        {posts.length === 0 ? (
+          <div class="empty-state">
+            <h2>Coming Soon</h2>
+            <p>We're working on some great content. Check back soon!</p>
+            <p>In the meantime, <a href="/#waitlist">join our beta</a> to get updates.</p>
+          </div>
+        ) : (
+          <div class="posts-grid">
+            {posts.map((post) => (
+              <article class="post-card">
+                <a href={`/blog/${post.slug}`}>
+                  {post.data.image && (
+                    <img src={post.data.image} alt={`Cover image for ${post.data.title}`} class="post-image" />
+                  )}
+                  <div class="post-content">
+                    <div class="post-meta">
+                      <span class="post-date">
+                        {post.data.pubDate.toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric',
+                        })}
+                      </span>
+                      {post.data.tags.length > 0 && (
+                        <span class="post-tag">{post.data.tags[0]}</span>
+                      )}
+                    </div>
+                    <h2>{post.data.title}</h2>
+                    <p>{post.data.description}</p>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .blog-list-header {
+    padding: 3rem 0 4rem;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .back-link {
+    display: inline-block;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .back-link:hover {
+    color: var(--color-primary);
+  }
+
+  .blog-list-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+  }
+
+  .blog-list-content {
+    padding: 4rem 0;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--color-surface);
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+  }
+
+  .empty-state h2 {
+    margin-bottom: 1rem;
+  }
+
+  .empty-state p {
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .empty-state a {
+    color: var(--color-primary);
+  }
+
+  .posts-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .post-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+
+  .post-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .post-card a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .post-content {
+    padding: 1.5rem;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-date {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .post-tag {
+    font-size: 0.75rem;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--color-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+  }
+
+  .post-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .post-card p {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .blog-list-header h1 {
+      font-size: 2rem;
+    }
+  }
+</style>
