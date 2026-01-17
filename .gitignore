@@ -1,3 +1,6 @@
+# Worktrees (parallel dev environments)
+worktrees/
+
 # Dependencies
 node_modules/
 __pycache__/
