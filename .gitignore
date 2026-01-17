@@ -1,0 +1,77 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+.venv/
+pip-wheel-metadata/
+*.egg-info/
+.eggs/
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+*.egg
+*.whl
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+.env.*.local
+*.env
+
+# Testing
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime
+*.pid
+*.seed
+*.pid.lock
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Audio files (large, should use Git LFS or exclude)
+# Uncomment if needed:
+# *.wav
+# *.mp3
+# *.flac
+
+# Electron
+release/
+
+# Temporary
+tmp/
+temp/
+.cache/
+
+# Secrets
+secrets/
+*.pem
+*.key

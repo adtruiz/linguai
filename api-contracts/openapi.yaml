@@ -1,0 +1,261 @@
+openapi: 3.1.0
+info:
+  title: LinguAI API
+  description: AI-native acoustic analysis platform API
+  version: 0.1.0
+  license:
+    name: GPL-3.0
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+
+servers:
+  - url: http://localhost:8000
+    description: Local development
+  - url: https://api.linguai.app
+    description: Production
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      operationId: healthCheck
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+  /api/v1/analyze/spectrogram:
+    post:
+      summary: Generate spectrogram from audio
+      operationId: analyzeSpectrogram
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Audio file (WAV, MP3, FLAC)
+                time_step:
+                  type: number
+                  default: 0.005
+                  description: Time step in seconds
+                max_frequency:
+                  type: number
+                  default: 5000
+                  description: Maximum frequency in Hz
+      responses:
+        '200':
+          description: Spectrogram data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpectrogramResponse'
+
+  /api/v1/analyze/formants:
+    post:
+      summary: Extract formant frequencies (F1-F4)
+      operationId: analyzeFormants
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                max_formant:
+                  type: number
+                  default: 5500
+                time_step:
+                  type: number
+                  default: 0.01
+      responses:
+        '200':
+          description: Formant data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormantResponse'
+
+  /api/v1/analyze/pitch:
+    post:
+      summary: Extract pitch (F0) contour
+      operationId: analyzePitch
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                pitch_floor:
+                  type: number
+                  default: 75
+                pitch_ceiling:
+                  type: number
+                  default: 600
+      responses:
+        '200':
+          description: Pitch data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PitchResponse'
+
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [healthy, unhealthy]
+
+    SpectrogramResponse:
+      type: object
+      required:
+        - times
+        - frequencies
+        - intensities
+        - duration
+        - sample_rate
+      properties:
+        times:
+          type: array
+          items:
+            type: number
+        frequencies:
+          type: array
+          items:
+            type: number
+        intensities:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+        duration:
+          type: number
+        sample_rate:
+          type: integer
+
+    FormantResponse:
+      type: object
+      required:
+        - times
+        - f1
+        - f2
+        - f3
+        - f4
+      properties:
+        times:
+          type: array
+          items:
+            type: number
+        f1:
+          type: array
+          items:
+            type: number
+            nullable: true
+        f2:
+          type: array
+          items:
+            type: number
+            nullable: true
+        f3:
+          type: array
+          items:
+            type: number
+            nullable: true
+        f4:
+          type: array
+          items:
+            type: number
+            nullable: true
+
+    PitchResponse:
+      type: object
+      required:
+        - times
+        - frequencies
+      properties:
+        times:
+          type: array
+          items:
+            type: number
+        frequencies:
+          type: array
+          items:
+            type: number
+            nullable: true
+        unit:
+          type: string
+          default: Hz
+
+    Annotation:
+      type: object
+      description: A time-aligned annotation segment
+      required:
+        - id
+        - tier
+        - start
+        - end
+        - text
+      properties:
+        id:
+          type: string
+          format: uuid
+        tier:
+          type: string
+        start:
+          type: number
+          description: Start time in seconds
+        end:
+          type: number
+          description: End time in seconds
+        text:
+          type: string
+
+    Project:
+      type: object
+      description: A LinguAI project containing audio and annotations
+      required:
+        - id
+        - name
+        - created_at
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        audio_file:
+          type: string
+          description: Path or URL to audio file
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
