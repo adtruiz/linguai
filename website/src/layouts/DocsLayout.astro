@@ -1,0 +1,231 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  frontmatter?: {
+    title: string;
+    description?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const title = Astro.props.title || frontmatter?.title || 'Documentation';
+const description = Astro.props.description || frontmatter?.description;
+
+const sidebarItems = [
+  { title: 'Getting Started', href: '/docs/getting-started' },
+  { title: 'Spectrogram Analysis', href: '/docs/spectrogram' },
+  { title: 'Annotations', href: '/docs/annotations' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<BaseLayout title={`${title} | LinguAI Docs`} description={description}>
+  <div class="docs-wrapper">
+    <aside class="docs-sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="logo">LinguAI</a>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/docs" class:list={['nav-link', { active: currentPath === '/docs' || currentPath === '/docs/' }]}>
+          Documentation Home
+        </a>
+        <div class="nav-section">
+          <h3>Guides</h3>
+          {sidebarItems.map((item) => (
+            <a
+              href={item.href}
+              class:list={['nav-link', { active: currentPath.startsWith(item.href) }]}
+            >
+              {item.title}
+            </a>
+          ))}
+        </div>
+        <div class="nav-section">
+          <h3>Resources</h3>
+          <a href="https://github.com/adtruiz/linguai" class="nav-link" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+          <a href="/blog" class="nav-link">Blog</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="docs-content">
+      <article class="docs-article">
+        <slot />
+      </article>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-wrapper {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+  }
+
+  .docs-sidebar {
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+    padding: 2rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar-header {
+    margin-bottom: 2rem;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .nav-section {
+    margin-top: 1.5rem;
+  }
+
+  .nav-section h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: all 0.15s;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+    background: var(--color-background);
+    text-decoration: none;
+  }
+
+  .nav-link.active {
+    color: var(--color-primary);
+    background: rgba(37, 99, 235, 0.1);
+  }
+
+  .docs-content {
+    padding: 3rem 4rem;
+    max-width: 900px;
+  }
+
+  .docs-article {
+    line-height: 1.8;
+  }
+
+  .docs-article :global(h1) {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .docs-article :global(h2) {
+    font-size: 1.75rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .docs-article :global(h3) {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .docs-article :global(p) {
+    margin-bottom: 1.5rem;
+    color: var(--color-text-muted);
+  }
+
+  .docs-article :global(ul),
+  .docs-article :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .docs-article :global(li) {
+    margin-bottom: 0.5rem;
+    color: var(--color-text-muted);
+  }
+
+  .docs-article :global(code) {
+    background: var(--color-surface);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+  }
+
+  .docs-article :global(pre) {
+    background: var(--color-surface);
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--color-border);
+  }
+
+  .docs-article :global(pre code) {
+    background: none;
+    padding: 0;
+  }
+
+  .docs-article :global(a) {
+    color: var(--color-primary);
+  }
+
+  .docs-article :global(blockquote) {
+    border-left: 4px solid var(--color-primary);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  @media (max-width: 900px) {
+    .docs-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    .docs-sidebar {
+      position: fixed;
+      left: -100%;
+      width: 280px;
+      z-index: 100;
+      transition: left 0.3s;
+    }
+
+    .docs-sidebar.open {
+      left: 0;
+    }
+
+    .docs-content {
+      padding: 2rem;
+    }
+  }
+</style>

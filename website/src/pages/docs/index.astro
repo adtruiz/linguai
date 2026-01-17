@@ -1,0 +1,85 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout title="Documentation" description="Learn how to use LinguAI for acoustic analysis">
+  <h1>Documentation</h1>
+  <p class="lead">
+    Welcome to the LinguAI documentation. Learn how to use our AI-native acoustic analysis
+    platform to streamline your phonetic research.
+  </p>
+
+  <div class="cards">
+    <a href="/docs/getting-started" class="card">
+      <h3>Getting Started</h3>
+      <p>Install LinguAI and create your first project in under 5 minutes.</p>
+    </a>
+
+    <a href="/docs/spectrogram" class="card">
+      <h3>Spectrogram Analysis</h3>
+      <p>Learn how to view, analyze, and export spectrograms with precision.</p>
+    </a>
+
+    <a href="/docs/annotations" class="card">
+      <h3>Annotations</h3>
+      <p>Create, edit, and export annotations with AI assistance or manually.</p>
+    </a>
+  </div>
+
+  <h2>Quick Links</h2>
+  <ul>
+    <li><a href="https://github.com/adtruiz/linguai/releases">Download the latest release</a></li>
+    <li><a href="https://github.com/adtruiz/linguai">View the source code on GitHub</a></li>
+    <li><a href="/blog">Read our blog for tips and tutorials</a></li>
+  </ul>
+
+  <h2>Need Help?</h2>
+  <p>
+    If you can't find what you're looking for, feel free to:
+  </p>
+  <ul>
+    <li><a href="https://github.com/adtruiz/linguai/issues">Open an issue on GitHub</a></li>
+    <li><a href="mailto:hello@linguai.app">Email us at hello@linguai.app</a></li>
+  </ul>
+</DocsLayout>
+
+<style>
+  .lead {
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin-bottom: 2rem;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0 3rem;
+  }
+
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  .card h3 {
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .card p {
+    color: var(--color-text-muted);
+    margin: 0;
+    font-size: 0.875rem;
+  }
+</style>

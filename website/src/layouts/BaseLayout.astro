@@ -2,9 +2,27 @@
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  author?: string;
+  noindex?: boolean;
 }
 
-const { title, description = 'LinguAI - AI-native acoustic analysis platform' } = Astro.props;
+const {
+  title,
+  description = 'LinguAI - AI-native acoustic analysis platform for phoneticians, linguists, and researchers. The modern Praat alternative with AI-powered annotations.',
+  image = '/og-image.png',
+  type = 'website',
+  publishedTime,
+  modifiedTime,
+  author,
+  noindex = false
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://linguai.app');
+const ogImageURL = new URL(image, Astro.site || 'https://linguai.app');
 ---
 
 <!DOCTYPE html>
@@ -12,21 +30,75 @@ const { title, description = 'LinguAI - AI-native acoustic analysis platform' } 
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-    <meta name="keywords" content="phonetics, acoustic analysis, spectrogram, praat alternative, linguistics software, AI" />
 
-    <!-- Open Graph -->
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- SEO Keywords -->
+    <meta name="keywords" content="phonetics, acoustic analysis, spectrogram, praat alternative, linguistics software, AI phoneme detection, speech analysis, formant tracking, phonetic transcription, TextGrid, IPA, spectrogram tool, acoustic phonetics, speech research, linguistics research tool" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:site_name" content="LinguAI" />
+    <meta property="og:locale" content="en_US" />
+    {type === 'article' && publishedTime && (
+      <meta property="article:published_time" content={publishedTime.toISOString()} />
+    )}
+    {type === 'article' && modifiedTime && (
+      <meta property="article:modified_time" content={modifiedTime.toISOString()} />
+    )}
+    {type === 'article' && author && (
+      <meta property="article:author" content={author} />
+    )}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
 
+    <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0f172a" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "LinguAI",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Windows, macOS, Linux, Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": description,
+      "url": "https://linguai.app",
+      "author": {
+        "@type": "Organization",
+        "name": "LinguAI"
+      }
+    })} />
+
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   </head>
   <body>
     <slot />
@@ -42,6 +114,9 @@ const { title, description = 'LinguAI - AI-native acoustic analysis platform' } 
     --color-text: #f8fafc;
     --color-text-muted: #94a3b8;
     --color-border: #334155;
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
   }
 
   * {
@@ -59,6 +134,8 @@ const { title, description = 'LinguAI - AI-native acoustic analysis platform' } 
     background-color: var(--color-background);
     color: var(--color-text);
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   a {
@@ -68,5 +145,16 @@ const { title, description = 'LinguAI - AI-native acoustic analysis platform' } 
 
   a:hover {
     text-decoration: underline;
+  }
+
+  ::selection {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  /* Focus styles for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 </style>
