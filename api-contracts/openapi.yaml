@@ -105,6 +105,10 @@ paths:
                 file:
                   type: string
                   format: binary
+                time_step:
+                  type: number
+                  default: 0.01
+                  description: Time step in seconds
                 pitch_floor:
                   type: number
                   default: 75
