@@ -1,19 +1,16 @@
 """Audio analysis endpoints powered by Parselmouth"""
 
+import math
+import os
+import tempfile
+
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from pydantic import BaseModel
-import tempfile
-import os
 
 router = APIRouter()
 
-
-class SpectrogramRequest(BaseModel):
-    """Request parameters for spectrogram generation"""
-    time_step: float = 0.005  # seconds
-    frequency_step: float = 20.0  # Hz
-    max_frequency: float = 5000.0  # Hz
-    window_length: float = 0.025  # seconds
+# 50MB file size limit
+MAX_FILE_SIZE = 50 * 1024 * 1024
 
 
 class SpectrogramResponse(BaseModel):
@@ -41,6 +38,32 @@ class PitchResponse(BaseModel):
     unit: str = "Hz"
 
 
+async def _save_upload_to_temp(file: UploadFile) -> str:
+    """Save uploaded file to temp location with size validation."""
+    content = await file.read()
+    if len(content) > MAX_FILE_SIZE:
+        raise HTTPException(
+            status_code=413,
+            detail=f"File too large. Maximum size is {MAX_FILE_SIZE // (1024*1024)}MB"
+        )
+
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
+        tmp.write(content)
+        return tmp.name
+
+
+def _get_parselmouth():
+    """Import and return parselmouth, raising HTTPException if unavailable."""
+    try:
+        import parselmouth
+        return parselmouth
+    except ImportError:
+        raise HTTPException(
+            status_code=500,
+            detail="Parselmouth not installed"
+        )
+
+
 @router.post("/analyze/spectrogram", response_model=SpectrogramResponse)
 async def analyze_spectrogram(
     file: UploadFile = File(...),
@@ -51,44 +74,36 @@ async def analyze_spectrogram(
     Generate spectrogram data from an audio file.
     Returns time-frequency intensity matrix.
     """
-    try:
-        import parselmouth
-        from parselmouth.praat import call
-    except ImportError:
-        raise HTTPException(
-            status_code=500,
-            detail="Parselmouth not installed. Run: pip install parselmouth"
-        )
+    parselmouth = _get_parselmouth()
+    import numpy as np
 
-    # Save uploaded file temporarily
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
-        content = await file.read()
-        tmp.write(content)
-        tmp_path = tmp.name
+    tmp_path = await _save_upload_to_temp(file)
 
     try:
-        # Load sound with Parselmouth
         sound = parselmouth.Sound(tmp_path)
-
-        # Create spectrogram
         spectrogram = sound.to_spectrogram(
             time_step=time_step,
             maximum_frequency=max_frequency,
         )
 
-        # Extract data
         times = list(spectrogram.xs())
         frequencies = list(spectrogram.ys())
 
-        # Get intensity values (convert to list of lists)
-        intensities = []
-        for t_idx in range(spectrogram.n_frames):
-            frame = []
-            for f_idx in range(spectrogram.n_bins):
-                # Get power spectral density and convert to dB
-                value = spectrogram.get_power_at(t_idx + 1, f_idx + 1)
-                frame.append(10 * (value + 1e-30).__log10__() if value > 0 else -100)
-            intensities.append(frame)
+        # Extract power values into numpy array
+        n_frames = spectrogram.n_frames
+        n_freqs = len(frequencies)
+        intensities_array = np.zeros((n_frames, n_freqs))
+        for t_idx in range(n_frames):
+            for f_idx in range(n_freqs):
+                intensities_array[t_idx, f_idx] = spectrogram.get_power_at(t_idx + 1, f_idx + 1)
+
+        # Convert to dB
+        intensities_array = np.where(
+            intensities_array > 0,
+            10 * np.log10(intensities_array + 1e-30),
+            -100
+        )
+        intensities = intensities_array.tolist()
 
         return SpectrogramResponse(
             times=times,
@@ -99,7 +114,6 @@ async def analyze_spectrogram(
         )
 
     finally:
-        # Clean up temp file
         os.unlink(tmp_path)
 
 
@@ -113,15 +127,9 @@ async def analyze_formants(
     Extract formant frequencies (F1-F4) from audio.
     Useful for vowel analysis.
     """
-    try:
-        import parselmouth
-    except ImportError:
-        raise HTTPException(status_code=500, detail="Parselmouth not installed")
+    parselmouth = _get_parselmouth()
 
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
-        content = await file.read()
-        tmp.write(content)
-        tmp_path = tmp.name
+    tmp_path = await _save_upload_to_temp(file)
 
     try:
         sound = parselmouth.Sound(tmp_path)
@@ -141,8 +149,8 @@ async def analyze_formants(
             for formant_num, formant_list in [(1, f1), (2, f2), (3, f3), (4, f4)]:
                 try:
                     val = formants.get_value_at_time(formant_num, t)
-                    formant_list.append(val if val == val else None)  # NaN check
-                except:
+                    formant_list.append(val if not math.isnan(val) else None)
+                except Exception:
                     formant_list.append(None)
 
         return FormantResponse(times=times, f1=f1, f2=f2, f3=f3, f4=f4)
@@ -161,15 +169,9 @@ async def analyze_pitch(
     """
     Extract pitch (F0) contour from audio.
     """
-    try:
-        import parselmouth
-    except ImportError:
-        raise HTTPException(status_code=500, detail="Parselmouth not installed")
+    parselmouth = _get_parselmouth()
 
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
-        content = await file.read()
-        tmp.write(content)
-        tmp_path = tmp.name
+    tmp_path = await _save_upload_to_temp(file)
 
     try:
         sound = parselmouth.Sound(tmp_path)
@@ -187,7 +189,7 @@ async def analyze_pitch(
             times.append(t)
 
             f0 = pitch.get_value_at_time(t)
-            frequencies.append(f0 if f0 == f0 else None)  # NaN check
+            frequencies.append(f0 if not math.isnan(f0) else None)
 
         return PitchResponse(times=times, frequencies=frequencies)
 
