@@ -1,6 +1,17 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useRef, useState, useCallback, useEffect, useImperativeHandle, forwardRef } from 'react';
 
 const SKIP_SECONDS = 5;
+
+export interface AudioPlayerRef {
+  togglePlay: () => void;
+  seek: (time: number) => void;
+  seekBy: (delta: number) => void;
+  goToStart: () => void;
+  goToEnd: () => void;
+  playSelection: () => void;
+  isPlaying: boolean;
+  duration: number;
+}
 
 interface AudioPlayerProps {
   file: File | null;
@@ -12,7 +23,7 @@ interface AudioPlayerProps {
   onPlayStateChange?: (isPlaying: boolean) => void;
 }
 
-export function AudioPlayer({
+export const AudioPlayer = forwardRef<AudioPlayerRef, AudioPlayerProps>(function AudioPlayer({
   file,
   currentTime = 0,
   selectionStart,
@@ -20,7 +31,7 @@ export function AudioPlayer({
   onTimeUpdate,
   onDurationChange,
   onPlayStateChange,
-}: AudioPlayerProps) {
+}, ref) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -124,39 +135,52 @@ export function AudioPlayer({
     }
   }, [selectionStart]);
 
+  const seek = useCallback((time: number) => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.currentTime = Math.max(0, Math.min(duration, time));
+    }
+  }, [duration]);
+
+  const seekBy = useCallback((delta: number) => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.currentTime = Math.max(0, Math.min(duration, audio.currentTime + delta));
+    }
+  }, [duration]);
+
+  const goToStart = useCallback(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.currentTime = 0;
+    }
+  }, []);
+
+  const goToEnd = useCallback(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.currentTime = duration;
+    }
+  }, [duration]);
+
+  // Expose imperative methods via ref
+  useImperativeHandle(ref, () => ({
+    togglePlay,
+    seek,
+    seekBy,
+    goToStart,
+    goToEnd,
+    playSelection,
+    isPlaying,
+    duration,
+  }), [togglePlay, seek, seekBy, goToStart, goToEnd, playSelection, isPlaying, duration]);
+
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     const ms = Math.floor((seconds % 1) * 100);
     return `${mins}:${secs.toString().padStart(2, '0')}.${ms.toString().padStart(2, '0')}`;
   };
-
-  // Keyboard shortcuts
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
-        return;
-      }
-
-      switch (e.key) {
-        case ' ':
-          e.preventDefault();
-          togglePlay();
-          break;
-        case 'ArrowLeft':
-          e.preventDefault();
-          skipBackward();
-          break;
-        case 'ArrowRight':
-          e.preventDefault();
-          skipForward();
-          break;
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [togglePlay, skipBackward, skipForward]);
 
   if (!file) {
     return null;
@@ -299,6 +323,6 @@ export function AudioPlayer({
       </div>
     </div>
   );
-}
+});
 
 export default AudioPlayer;

@@ -3,9 +3,16 @@ import type {
   SpectrogramResponse,
   FormantResponse,
   PitchResponse,
+  WaveformResponse,
+  IntensityResponse,
+  VoiceQualityResponse,
+  TextGridImportResponse,
   SpectrogramOptions,
   FormantOptions,
   PitchOptions,
+  WaveformOptions,
+  IntensityOptions,
+  VoiceQualityOptions,
 } from '../types/api';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
@@ -97,6 +104,77 @@ export const api = {
       body: formData,
     });
     return handleResponse<PitchResponse>(response);
+  },
+
+  async analyzeWaveform(
+    file: File,
+    options: WaveformOptions = {}
+  ): Promise<WaveformResponse> {
+    const formData = new FormData();
+    formData.append('file', file);
+    if (options.time_step !== undefined) {
+      formData.append('time_step', String(options.time_step));
+    }
+    if (options.max_points !== undefined) {
+      formData.append('max_points', String(options.max_points));
+    }
+
+    const response = await fetch(`${API_BASE_URL}/api/v1/analyze/waveform`, {
+      method: 'POST',
+      body: formData,
+    });
+    return handleResponse<WaveformResponse>(response);
+  },
+
+  async analyzeIntensity(
+    file: File,
+    options: IntensityOptions = {}
+  ): Promise<IntensityResponse> {
+    const formData = new FormData();
+    formData.append('file', file);
+    if (options.time_step !== undefined) {
+      formData.append('time_step', String(options.time_step));
+    }
+    if (options.minimum_pitch !== undefined) {
+      formData.append('minimum_pitch', String(options.minimum_pitch));
+    }
+
+    const response = await fetch(`${API_BASE_URL}/api/v1/analyze/intensity`, {
+      method: 'POST',
+      body: formData,
+    });
+    return handleResponse<IntensityResponse>(response);
+  },
+
+  async analyzeVoiceQuality(
+    file: File,
+    options: VoiceQualityOptions = {}
+  ): Promise<VoiceQualityResponse> {
+    const formData = new FormData();
+    formData.append('file', file);
+    if (options.pitch_floor !== undefined) {
+      formData.append('pitch_floor', String(options.pitch_floor));
+    }
+    if (options.pitch_ceiling !== undefined) {
+      formData.append('pitch_ceiling', String(options.pitch_ceiling));
+    }
+
+    const response = await fetch(`${API_BASE_URL}/api/v1/analyze/voice-quality`, {
+      method: 'POST',
+      body: formData,
+    });
+    return handleResponse<VoiceQualityResponse>(response);
+  },
+
+  async importTextGrid(file: File): Promise<TextGridImportResponse> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await fetch(`${API_BASE_URL}/api/v1/import/textgrid`, {
+      method: 'POST',
+      body: formData,
+    });
+    return handleResponse<TextGridImportResponse>(response);
   },
 };
 

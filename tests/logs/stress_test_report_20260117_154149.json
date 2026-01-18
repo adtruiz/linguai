@@ -1,0 +1,2107 @@
+{
+  "timestamp": "20260117_154149",
+  "total_tests": 144,
+  "passed": 141,
+  "failed": 3,
+  "errors": 0,
+  "timeouts": 0,
+  "total_duration_ms": 10731.034994125366,
+  "total_data_processed_mb": 284.98293113708496,
+  "results": [
+    {
+      "file_name": "extended_30_seconds.wav",
+      "batch": "batch_1_extended_duration",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 269.06323432922363,
+      "file_size_kb": 2584.02734375,
+      "message": "",
+      "details": {
+        "frames": 5999,
+        "freq_bins": 116,
+        "duration": 30.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "extended_30_seconds.wav",
+      "batch": "batch_1_extended_duration",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 210.03103256225586,
+      "file_size_kb": 2584.02734375,
+      "message": "",
+      "details": {
+        "frames": 2995,
+        "f1_values": 2995,
+        "f2_values": 2995
+      }
+    },
+    {
+      "file_name": "extended_30_seconds.wav",
+      "batch": "batch_1_extended_duration",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 36.103010177612305,
+      "file_size_kb": 2584.02734375,
+      "message": "",
+      "details": {
+        "frames": 2997,
+        "voiced_frames": 1260,
+        "avg_pitch_hz": 430.1
+      }
+    },
+    {
+      "file_name": "extended_1_minute.wav",
+      "batch": "batch_1_extended_duration",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 519.1640853881836,
+      "file_size_kb": 5168.01171875,
+      "message": "",
+      "details": {
+        "frames": 11999,
+        "freq_bins": 116,
+        "duration": 60.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "extended_1_minute.wav",
+      "batch": "batch_1_extended_duration",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 445.30606269836426,
+      "file_size_kb": 5168.01171875,
+      "message": "",
+      "details": {
+        "frames": 5995,
+        "f1_values": 5995,
+        "f2_values": 5995
+      }
+    },
+    {
+      "file_name": "extended_1_minute.wav",
+      "batch": "batch_1_extended_duration",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 67.8720474243164,
+      "file_size_kb": 5168.01171875,
+      "message": "",
+      "details": {
+        "frames": 5997,
+        "voiced_frames": 1682,
+        "avg_pitch_hz": 462.9
+      }
+    },
+    {
+      "file_name": "extended_5_minutes.wav",
+      "batch": "batch_1_extended_duration",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 2570.6567764282227,
+      "file_size_kb": 25839.88671875,
+      "message": "",
+      "details": {
+        "frames": 59999,
+        "freq_bins": 116,
+        "duration": 300.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "extended_5_minutes.wav",
+      "batch": "batch_1_extended_duration",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 2223.0758666992188,
+      "file_size_kb": 25839.88671875,
+      "message": "",
+      "details": {
+        "frames": 29996,
+        "f1_values": 29996,
+        "f2_values": 29996
+      }
+    },
+    {
+      "file_name": "extended_5_minutes.wav",
+      "batch": "batch_1_extended_duration",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 400.62403678894043,
+      "file_size_kb": 25839.88671875,
+      "message": "",
+      "details": {
+        "frames": 29996,
+        "voiced_frames": 2059,
+        "avg_pitch_hz": 479.5
+      }
+    },
+    {
+      "file_name": "extended_10_minutes.wav",
+      "batch": "batch_1_extended_duration",
+      "endpoint": "spectrogram",
+      "status": "FAIL",
+      "duration_ms": 64.79001045227051,
+      "file_size_kb": 51679.73046875,
+      "message": "HTTP 413: File too large. Maximum size is 50MB",
+      "details": {}
+    },
+    {
+      "file_name": "extended_10_minutes.wav",
+      "batch": "batch_1_extended_duration",
+      "endpoint": "formants",
+      "status": "FAIL",
+      "duration_ms": 68.6652660369873,
+      "file_size_kb": 51679.73046875,
+      "message": "HTTP 413: File too large. Maximum size is 50MB",
+      "details": {}
+    },
+    {
+      "file_name": "extended_10_minutes.wav",
+      "batch": "batch_1_extended_duration",
+      "endpoint": "pitch",
+      "status": "FAIL",
+      "duration_ms": 68.76897811889648,
+      "file_size_kb": 51679.73046875,
+      "message": "HTTP 413: File too large. Maximum size is 50MB",
+      "details": {}
+    },
+    {
+      "file_name": "sample_rate_8000hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 45.96304893493652,
+      "file_size_kb": 78.16796875,
+      "message": "",
+      "details": {
+        "frames": 999,
+        "freq_bins": 128,
+        "duration": 5.0,
+        "sample_rate": 8000
+      }
+    },
+    {
+      "file_name": "sample_rate_8000hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 28.172969818115234,
+      "file_size_kb": 78.16796875,
+      "message": "",
+      "details": {
+        "frames": 496,
+        "f1_values": 496,
+        "f2_values": 496
+      }
+    },
+    {
+      "file_name": "sample_rate_8000hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 3.6759376525878906,
+      "file_size_kb": 78.16796875,
+      "message": "",
+      "details": {
+        "frames": 497,
+        "voiced_frames": 497,
+        "avg_pitch_hz": 150.0
+      }
+    },
+    {
+      "file_name": "sample_rate_16000hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 56.275129318237305,
+      "file_size_kb": 156.29296875,
+      "message": "",
+      "details": {
+        "frames": 999,
+        "freq_bins": 160,
+        "duration": 5.0,
+        "sample_rate": 16000
+      }
+    },
+    {
+      "file_name": "sample_rate_16000hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 30.53903579711914,
+      "file_size_kb": 156.29296875,
+      "message": "",
+      "details": {
+        "frames": 496,
+        "f1_values": 496,
+        "f2_values": 496
+      }
+    },
+    {
+      "file_name": "sample_rate_16000hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 5.708932876586914,
+      "file_size_kb": 156.29296875,
+      "message": "",
+      "details": {
+        "frames": 497,
+        "voiced_frames": 497,
+        "avg_pitch_hz": 150.0
+      }
+    },
+    {
+      "file_name": "sample_rate_22050hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 39.85786437988281,
+      "file_size_kb": 215.375,
+      "message": "",
+      "details": {
+        "frames": 999,
+        "freq_bins": 116,
+        "duration": 5.0,
+        "sample_rate": 22050
+      }
+    },
+    {
+      "file_name": "sample_rate_22050hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 29.50310707092285,
+      "file_size_kb": 215.375,
+      "message": "",
+      "details": {
+        "frames": 496,
+        "f1_values": 496,
+        "f2_values": 496
+      }
+    },
+    {
+      "file_name": "sample_rate_22050hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 6.21795654296875,
+      "file_size_kb": 215.375,
+      "message": "",
+      "details": {
+        "frames": 497,
+        "voiced_frames": 497,
+        "avg_pitch_hz": 150.0
+      }
+    },
+    {
+      "file_name": "sample_rate_44100hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 40.88282585144043,
+      "file_size_kb": 430.70703125,
+      "message": "",
+      "details": {
+        "frames": 999,
+        "freq_bins": 116,
+        "duration": 5.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "sample_rate_44100hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 33.97989273071289,
+      "file_size_kb": 430.70703125,
+      "message": "",
+      "details": {
+        "frames": 496,
+        "f1_values": 496,
+        "f2_values": 496
+      }
+    },
+    {
+      "file_name": "sample_rate_44100hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 7.560968399047852,
+      "file_size_kb": 430.70703125,
+      "message": "",
+      "details": {
+        "frames": 497,
+        "voiced_frames": 497,
+        "avg_pitch_hz": 150.0
+      }
+    },
+    {
+      "file_name": "sample_rate_48000hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 78.64117622375488,
+      "file_size_kb": 468.79296875,
+      "message": "",
+      "details": {
+        "frames": 999,
+        "freq_bins": 213,
+        "duration": 5.0,
+        "sample_rate": 48000
+      }
+    },
+    {
+      "file_name": "sample_rate_48000hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 33.24413299560547,
+      "file_size_kb": 468.79296875,
+      "message": "",
+      "details": {
+        "frames": 496,
+        "f1_values": 496,
+        "f2_values": 496
+      }
+    },
+    {
+      "file_name": "sample_rate_48000hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 8.363008499145508,
+      "file_size_kb": 468.79296875,
+      "message": "",
+      "details": {
+        "frames": 497,
+        "voiced_frames": 497,
+        "avg_pitch_hz": 150.0
+      }
+    },
+    {
+      "file_name": "sample_rate_96000hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 82.60774612426758,
+      "file_size_kb": 937.54296875,
+      "message": "",
+      "details": {
+        "frames": 999,
+        "freq_bins": 213,
+        "duration": 5.0,
+        "sample_rate": 96000
+      }
+    },
+    {
+      "file_name": "sample_rate_96000hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 42.224884033203125,
+      "file_size_kb": 937.54296875,
+      "message": "",
+      "details": {
+        "frames": 496,
+        "f1_values": 496,
+        "f2_values": 496
+      }
+    },
+    {
+      "file_name": "sample_rate_96000hz.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 12.737035751342773,
+      "file_size_kb": 937.54296875,
+      "message": "",
+      "details": {
+        "frames": 497,
+        "voiced_frames": 497,
+        "avg_pitch_hz": 150.0
+      }
+    },
+    {
+      "file_name": "channels_mono.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 25.700807571411133,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "channels_mono.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 21.89016342163086,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "channels_mono.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 6.798267364501953,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 297,
+        "avg_pitch_hz": 440.0
+      }
+    },
+    {
+      "file_name": "channels_stereo.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 27.482271194458008,
+      "file_size_kb": 516.83984375,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "channels_stereo.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 34.89804267883301,
+      "file_size_kb": 516.83984375,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "channels_stereo.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 7.152318954467773,
+      "file_size_kb": 516.83984375,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 297,
+        "avg_pitch_hz": 110.0
+      }
+    },
+    {
+      "file_name": "bit_depth_8bit.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 28.333187103271484,
+      "file_size_kb": 129.2421875,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "bit_depth_8bit.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 24.194717407226562,
+      "file_size_kb": 129.2421875,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "bit_depth_8bit.wav",
+      "batch": "batch_2_format_variety",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 7.96818733215332,
+      "file_size_kb": 129.2421875,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 297,
+        "avg_pitch_hz": 440.0
+      }
+    },
+    {
+      "file_name": "vowel_inventory.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 51.654815673828125,
+      "file_size_kb": 516.83984375,
+      "message": "",
+      "details": {
+        "frames": 1199,
+        "freq_bins": 116,
+        "duration": 6.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "vowel_inventory.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 44.71397399902344,
+      "file_size_kb": 516.83984375,
+      "message": "",
+      "details": {
+        "frames": 596,
+        "f1_values": 596,
+        "f2_values": 596
+      }
+    },
+    {
+      "file_name": "vowel_inventory.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 8.091926574707031,
+      "file_size_kb": 516.83984375,
+      "message": "",
+      "details": {
+        "frames": 597,
+        "voiced_frames": 472,
+        "avg_pitch_hz": 125.6
+      }
+    },
+    {
+      "file_name": "vowel_i_sustained.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 9.401798248291016,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 199,
+        "freq_bins": 116,
+        "duration": 1.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "vowel_i_sustained.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 7.780790328979492,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 95,
+        "f1_values": 95,
+        "f2_values": 95
+      }
+    },
+    {
+      "file_name": "vowel_i_sustained.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 2.604961395263672,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 97,
+        "voiced_frames": 61,
+        "avg_pitch_hz": 150.5
+      }
+    },
+    {
+      "file_name": "vowel_ae_sustained.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 8.558034896850586,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 199,
+        "freq_bins": 116,
+        "duration": 1.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "vowel_ae_sustained.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 7.313966751098633,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 95,
+        "f1_values": 95,
+        "f2_values": 95
+      }
+    },
+    {
+      "file_name": "vowel_ae_sustained.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 3.821134567260742,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 97,
+        "voiced_frames": 55,
+        "avg_pitch_hz": 144.5
+      }
+    },
+    {
+      "file_name": "vowel_ah_sustained.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 9.523868560791016,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 199,
+        "freq_bins": 116,
+        "duration": 1.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "vowel_ah_sustained.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 7.617950439453125,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 95,
+        "f1_values": 95,
+        "f2_values": 95
+      }
+    },
+    {
+      "file_name": "vowel_ah_sustained.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 3.3669471740722656,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 97,
+        "voiced_frames": 55,
+        "avg_pitch_hz": 144.5
+      }
+    },
+    {
+      "file_name": "vowel_u_sustained.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 10.683059692382812,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 199,
+        "freq_bins": 116,
+        "duration": 1.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "vowel_u_sustained.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 7.467985153198242,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 95,
+        "f1_values": 95,
+        "f2_values": 95
+      }
+    },
+    {
+      "file_name": "vowel_u_sustained.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 2.6979446411132812,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 97,
+        "voiced_frames": 60,
+        "avg_pitch_hz": 149.8
+      }
+    },
+    {
+      "file_name": "fricative_inventory.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 22.80282974243164,
+      "file_size_kb": 241.21484375,
+      "message": "",
+      "details": {
+        "frames": 559,
+        "freq_bins": 116,
+        "duration": 2.8,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "fricative_inventory.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 17.973661422729492,
+      "file_size_kb": 241.21484375,
+      "message": "",
+      "details": {
+        "frames": 276,
+        "f1_values": 276,
+        "f2_values": 276
+      }
+    },
+    {
+      "file_name": "fricative_inventory.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 4.625797271728516,
+      "file_size_kb": 241.21484375,
+      "message": "",
+      "details": {
+        "frames": 277,
+        "voiced_frames": 0,
+        "avg_pitch_hz": 0
+      }
+    },
+    {
+      "file_name": "stop_consonant_inventory.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 22.564172744750977,
+      "file_size_kb": 222.26171875,
+      "message": "",
+      "details": {
+        "frames": 514,
+        "freq_bins": 116,
+        "duration": 2.579954648526077,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "stop_consonant_inventory.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 17.72904396057129,
+      "file_size_kb": 222.26171875,
+      "message": "",
+      "details": {
+        "frames": 253,
+        "f1_values": 253,
+        "f2_values": 253
+      }
+    },
+    {
+      "file_name": "stop_consonant_inventory.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 5.182981491088867,
+      "file_size_kb": 222.26171875,
+      "message": "",
+      "details": {
+        "frames": 254,
+        "voiced_frames": 151,
+        "avg_pitch_hz": 125.0
+      }
+    },
+    {
+      "file_name": "mandarin_tones.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 25.027036666870117,
+      "file_size_kb": 241.21484375,
+      "message": "",
+      "details": {
+        "frames": 559,
+        "freq_bins": 116,
+        "duration": 2.8,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "mandarin_tones.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 19.6077823638916,
+      "file_size_kb": 241.21484375,
+      "message": "",
+      "details": {
+        "frames": 276,
+        "f1_values": 276,
+        "f2_values": 276
+      }
+    },
+    {
+      "file_name": "mandarin_tones.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 4.81104850769043,
+      "file_size_kb": 241.21484375,
+      "message": "",
+      "details": {
+        "frames": 277,
+        "voiced_frames": 188,
+        "avg_pitch_hz": 192.9
+      }
+    },
+    {
+      "file_name": "diphthong_ai.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 4.962921142578125,
+      "file_size_kb": 34.49609375,
+      "message": "",
+      "details": {
+        "frames": 79,
+        "freq_bins": 116,
+        "duration": 0.4,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "diphthong_ai.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 3.7550926208496094,
+      "file_size_kb": 34.49609375,
+      "message": "",
+      "details": {
+        "frames": 36,
+        "f1_values": 36,
+        "f2_values": 36
+      }
+    },
+    {
+      "file_name": "diphthong_ai.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 2.560853958129883,
+      "file_size_kb": 34.49609375,
+      "message": "",
+      "details": {
+        "frames": 37,
+        "voiced_frames": 37,
+        "avg_pitch_hz": 125.0
+      }
+    },
+    {
+      "file_name": "intonation_question_rising.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 9.065866470336914,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 199,
+        "freq_bins": 116,
+        "duration": 1.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "intonation_question_rising.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 7.262945175170898,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 95,
+        "f1_values": 95,
+        "f2_values": 95
+      }
+    },
+    {
+      "file_name": "intonation_question_rising.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 3.2279491424560547,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 97,
+        "voiced_frames": 97,
+        "avg_pitch_hz": 200.0
+      }
+    },
+    {
+      "file_name": "intonation_statement_falling.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 9.277105331420898,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 199,
+        "freq_bins": 116,
+        "duration": 1.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "intonation_statement_falling.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 9.002208709716797,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 95,
+        "f1_values": 95,
+        "f2_values": 95
+      }
+    },
+    {
+      "file_name": "intonation_statement_falling.wav",
+      "batch": "batch_3_phonetic_patterns",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 2.846240997314453,
+      "file_size_kb": 86.17578125,
+      "message": "",
+      "details": {
+        "frames": 97,
+        "voiced_frames": 86,
+        "avg_pitch_hz": 126.6
+      }
+    },
+    {
+      "file_name": "very_quiet_signal.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 24.662017822265625,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "very_quiet_signal.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 21.030902862548828,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "very_quiet_signal.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 7.938861846923828,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 297,
+        "avg_pitch_hz": 440.1
+      }
+    },
+    {
+      "file_name": "clipped_distorted.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 24.875879287719727,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "clipped_distorted.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 21.031856536865234,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "clipped_distorted.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 6.09898567199707,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 297,
+        "avg_pitch_hz": 440.0
+      }
+    },
+    {
+      "file_name": "silence_gaps.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 33.06698799133301,
+      "file_size_kb": 344.57421875,
+      "message": "",
+      "details": {
+        "frames": 799,
+        "freq_bins": 116,
+        "duration": 4.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "silence_gaps.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 26.824951171875,
+      "file_size_kb": 344.57421875,
+      "message": "",
+      "details": {
+        "frames": 395,
+        "f1_values": 395,
+        "f2_values": 395
+      }
+    },
+    {
+      "file_name": "silence_gaps.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 7.515192031860352,
+      "file_size_kb": 344.57421875,
+      "message": "",
+      "details": {
+        "frames": 397,
+        "voiced_frames": 253,
+        "avg_pitch_hz": 476.3
+      }
+    },
+    {
+      "file_name": "background_babble.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 40.968894958496094,
+      "file_size_kb": 430.70703125,
+      "message": "",
+      "details": {
+        "frames": 999,
+        "freq_bins": 116,
+        "duration": 5.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "background_babble.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 30.855894088745117,
+      "file_size_kb": 430.70703125,
+      "message": "",
+      "details": {
+        "frames": 496,
+        "f1_values": 496,
+        "f2_values": 496
+      }
+    },
+    {
+      "file_name": "background_babble.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 5.92494010925293,
+      "file_size_kb": 430.70703125,
+      "message": "",
+      "details": {
+        "frames": 497,
+        "voiced_frames": 0,
+        "avg_pitch_hz": 0
+      }
+    },
+    {
+      "file_name": "snr_30db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 24.554014205932617,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "snr_30db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 20.111083984375,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "snr_30db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 4.67681884765625,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 297,
+        "avg_pitch_hz": 200.0
+      }
+    },
+    {
+      "file_name": "snr_20db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 24.70993995666504,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "snr_20db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 20.172119140625,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "snr_20db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 4.7512054443359375,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 297,
+        "avg_pitch_hz": 200.1
+      }
+    },
+    {
+      "file_name": "snr_10db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 24.316072463989258,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "snr_10db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 20.2176570892334,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "snr_10db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 7.495880126953125,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 297,
+        "avg_pitch_hz": 200.1
+      }
+    },
+    {
+      "file_name": "snr_5db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 24.61719512939453,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "snr_5db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 20.673036575317383,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "snr_5db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 10.520219802856445,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 297,
+        "avg_pitch_hz": 200.0
+      }
+    },
+    {
+      "file_name": "snr_0db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 24.492979049682617,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "snr_0db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 21.080732345581055,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "snr_0db.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 10.141134262084961,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 297,
+        "avg_pitch_hz": 200.3
+      }
+    },
+    {
+      "file_name": "dc_offset.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 24.54400062561035,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "dc_offset.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 20.758867263793945,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "dc_offset.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 5.563020706176758,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 297,
+        "avg_pitch_hz": 440.0
+      }
+    },
+    {
+      "file_name": "very_short_50ms.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 1.5192031860351562,
+      "file_size_kb": 4.349609375,
+      "message": "",
+      "details": {
+        "frames": 9,
+        "freq_bins": 116,
+        "duration": 0.05,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "very_short_50ms.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 1.1491775512695312,
+      "file_size_kb": 4.349609375,
+      "message": "",
+      "details": {
+        "frames": 1,
+        "f1_values": 1,
+        "f2_values": 1
+      }
+    },
+    {
+      "file_name": "very_short_50ms.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 1.2018680572509766,
+      "file_size_kb": 4.349609375,
+      "message": "",
+      "details": {
+        "frames": 2,
+        "voiced_frames": 2,
+        "avg_pitch_hz": 440.0
+      }
+    },
+    {
+      "file_name": "frequency_sweep.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 24.28269386291504,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "frequency_sweep.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 20.611047744750977,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "frequency_sweep.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 9.330987930297852,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 156,
+        "avg_pitch_hz": 540.1
+      }
+    },
+    {
+      "file_name": "impulse_train.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 18.358945846557617,
+      "file_size_kb": 172.30859375,
+      "message": "",
+      "details": {
+        "frames": 399,
+        "freq_bins": 116,
+        "duration": 2.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "impulse_train.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 14.530181884765625,
+      "file_size_kb": 172.30859375,
+      "message": "",
+      "details": {
+        "frames": 195,
+        "f1_values": 195,
+        "f2_values": 195
+      }
+    },
+    {
+      "file_name": "impulse_train.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 3.9348602294921875,
+      "file_size_kb": 172.30859375,
+      "message": "",
+      "details": {
+        "frames": 197,
+        "voiced_frames": 0,
+        "avg_pitch_hz": 0
+      }
+    },
+    {
+      "file_name": "amplitude_modulated.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 25.400876998901367,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "amplitude_modulated.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 21.115779876708984,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "amplitude_modulated.wav",
+      "batch": "batch_4_edge_cases",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 9.107351303100586,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 282,
+        "avg_pitch_hz": 500.0
+      }
+    },
+    {
+      "file_name": "breathy_voice.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 25.172948837280273,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "breathy_voice.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 21.236419677734375,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "breathy_voice.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 13.070821762084961,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 297,
+        "avg_pitch_hz": 180.0
+      }
+    },
+    {
+      "file_name": "creaky_voice_vocal_fry.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 24.91903305053711,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "creaky_voice_vocal_fry.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 21.299123764038086,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "creaky_voice_vocal_fry.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 4.137277603149414,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 0,
+        "avg_pitch_hz": 0
+      }
+    },
+    {
+      "file_name": "voice_with_jitter.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 24.843931198120117,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "voice_with_jitter.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 21.73304557800293,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "voice_with_jitter.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 4.296779632568359,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 4,
+        "avg_pitch_hz": 121.5
+      }
+    },
+    {
+      "file_name": "voice_with_shimmer.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 24.116992950439453,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "voice_with_shimmer.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 22.54199981689453,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "voice_with_shimmer.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 4.875898361206055,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 297,
+        "avg_pitch_hz": 120.0
+      }
+    },
+    {
+      "file_name": "child_speech_pattern.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 25.37083625793457,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "child_speech_pattern.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 21.9728946685791,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "child_speech_pattern.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 5.510807037353516,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 105,
+        "avg_pitch_hz": 377.5
+      }
+    },
+    {
+      "file_name": "elderly_voice_tremor.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 25.76160430908203,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "elderly_voice_tremor.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 21.252155303955078,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "elderly_voice_tremor.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 7.441043853759766,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 140,
+        "avg_pitch_hz": 301.7
+      }
+    },
+    {
+      "file_name": "sustained_a_clinical.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 26.762962341308594,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 599,
+        "freq_bins": 116,
+        "duration": 3.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "sustained_a_clinical.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 22.174835205078125,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_values": 296,
+        "f2_values": 296
+      }
+    },
+    {
+      "file_name": "sustained_a_clinical.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 5.606174468994141,
+      "file_size_kb": 258.44140625,
+      "message": "",
+      "details": {
+        "frames": 297,
+        "voiced_frames": 101,
+        "avg_pitch_hz": 234.6
+      }
+    },
+    {
+      "file_name": "maximum_phonation_time.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 92.59915351867676,
+      "file_size_kb": 861.37109375,
+      "message": "",
+      "details": {
+        "frames": 1999,
+        "freq_bins": 116,
+        "duration": 10.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "maximum_phonation_time.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 66.44916534423828,
+      "file_size_kb": 861.37109375,
+      "message": "",
+      "details": {
+        "frames": 995,
+        "f1_values": 995,
+        "f2_values": 995
+      }
+    },
+    {
+      "file_name": "maximum_phonation_time.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 18.085241317749023,
+      "file_size_kb": 861.37109375,
+      "message": "",
+      "details": {
+        "frames": 997,
+        "voiced_frames": 997,
+        "avg_pitch_hz": 100.0
+      }
+    },
+    {
+      "file_name": "diadochokinetic_pataka.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 41.80788993835449,
+      "file_size_kb": 400.51171875,
+      "message": "",
+      "details": {
+        "frames": 928,
+        "freq_bins": 116,
+        "duration": 4.649433106575963,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "diadochokinetic_pataka.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 32.73510932922363,
+      "file_size_kb": 400.51171875,
+      "message": "",
+      "details": {
+        "frames": 460,
+        "f1_values": 460,
+        "f2_values": 460
+      }
+    },
+    {
+      "file_name": "diadochokinetic_pataka.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 7.597923278808594,
+      "file_size_kb": 400.51171875,
+      "message": "",
+      "details": {
+        "frames": 461,
+        "voiced_frames": 298,
+        "avg_pitch_hz": 125.3
+      }
+    },
+    {
+      "file_name": "reading_passage_prosody.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "spectrogram",
+      "status": "PASS",
+      "duration_ms": 43.33806037902832,
+      "file_size_kb": 430.70703125,
+      "message": "",
+      "details": {
+        "frames": 999,
+        "freq_bins": 116,
+        "duration": 5.0,
+        "sample_rate": 44100
+      }
+    },
+    {
+      "file_name": "reading_passage_prosody.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "formants",
+      "status": "PASS",
+      "duration_ms": 33.46896171569824,
+      "file_size_kb": 430.70703125,
+      "message": "",
+      "details": {
+        "frames": 496,
+        "f1_values": 496,
+        "f2_values": 496
+      }
+    },
+    {
+      "file_name": "reading_passage_prosody.wav",
+      "batch": "batch_5_clinical_research",
+      "endpoint": "pitch",
+      "status": "PASS",
+      "duration_ms": 7.071018218994141,
+      "file_size_kb": 430.70703125,
+      "message": "",
+      "details": {
+        "frames": 497,
+        "voiced_frames": 364,
+        "avg_pitch_hz": 140.4
+      }
+    }
+  ],
+  "summary_by_batch": {
+    "batch_1_extended_duration": {
+      "total": 12,
+      "passed": 9,
+      "failed": 3
+    },
+    "batch_2_format_variety": {
+      "total": 27,
+      "passed": 27,
+      "failed": 0
+    },
+    "batch_3_phonetic_patterns": {
+      "total": 33,
+      "passed": 33,
+      "failed": 0
+    },
+    "batch_4_edge_cases": {
+      "total": 42,
+      "passed": 42,
+      "failed": 0
+    },
+    "batch_5_clinical_research": {
+      "total": 30,
+      "passed": 30,
+      "failed": 0
+    }
+  },
+  "summary_by_endpoint": {
+    "spectrogram": {
+      "total": 48,
+      "passed": 47,
+      "avg_ms": 99.21729311029958
+    },
+    "formants": {
+      "total": 48,
+      "passed": 47,
+      "avg_ms": 82.38962356080401
+    },
+    "pitch": {
+      "total": 48,
+      "passed": 47,
+      "avg_ms": 16.734336284880943
+    }
+  }
+}

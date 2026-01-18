@@ -1,6 +1,8 @@
 import { useRef, useEffect, useState } from 'react';
 import { SpectrogramCanvas } from './SpectrogramCanvas';
 import { useSpectrogram } from './useSpectrogram';
+import { useFormants } from './useFormants';
+import { usePitch } from './usePitch';
 
 interface SpectrogramViewerProps {
   file: File | null;
@@ -38,8 +40,12 @@ export function SpectrogramViewer({
 }: SpectrogramViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 256 });
+  const [showFormants, setShowFormants] = useState(true);
+  const [showPitch, setShowPitch] = useState(true);
 
   const { data, isLoading, error } = useSpectrogram(file);
+  const { data: formantData } = useFormants(file, { enabled: showFormants && !!file });
+  const { data: pitchData } = usePitch(file, { enabled: showPitch && !!file });
 
   useEffect(() => {
     const container = containerRef.current;
@@ -111,6 +117,10 @@ export function SpectrogramViewer({
     >
       <SpectrogramCanvas
         data={data}
+        formantData={formantData}
+        pitchData={pitchData}
+        showFormants={showFormants}
+        showPitch={showPitch}
         width={dimensions.width}
         height={dimensions.height}
         zoomLevel={zoomLevel}
@@ -131,6 +141,24 @@ export function SpectrogramViewer({
           { label: '+', ariaLabel: 'Zoom in', action: () => onZoomChange?.(Math.min(zoomLevel * 1.5, 100)) },
           { label: '-', ariaLabel: 'Zoom out', action: () => onZoomChange?.(Math.max(zoomLevel / 1.5, 0.1)) },
           { label: 'Fit', ariaLabel: 'Fit to view', action: () => { onZoomChange?.(1); onScrollChange?.(0); } },
+          ...(selectionStart !== null && selectionEnd !== null && selectionStart !== selectionEnd ? [{
+            label: 'Sel',
+            ariaLabel: 'Zoom to selection',
+            action: () => {
+              const selectionDuration = Math.abs(selectionEnd - selectionStart);
+              if (selectionDuration > 0 && data) {
+                // Calculate zoom to fit selection with 5% padding
+                const targetZoom = (data.duration / selectionDuration) * 0.9;
+                const newZoom = Math.max(1, Math.min(targetZoom, 100));
+                onZoomChange?.(newZoom);
+                // Calculate scroll to center selection
+                const pixelsPerSecond = (dimensions.width * newZoom) / data.duration;
+                const selectionStartPx = Math.min(selectionStart, selectionEnd) * pixelsPerSecond;
+                const padding = dimensions.width * 0.05;
+                onScrollChange?.(Math.max(0, selectionStartPx - padding));
+              }
+            },
+          }] : []),
         ].map(({ label, ariaLabel, action }) => (
           <button
             type="button"
@@ -150,6 +178,42 @@ export function SpectrogramViewer({
             {label}
           </button>
         ))}
+      </div>
+
+      {/* Overlay toggles */}
+      <div style={{ position: 'absolute', top: '8px', left: '8px', display: 'flex', gap: '4px' }}>
+        <button
+          type="button"
+          onClick={() => setShowFormants(!showFormants)}
+          aria-label="Toggle formants"
+          style={{
+            padding: '4px 8px',
+            fontSize: '11px',
+            backgroundColor: showFormants ? 'rgba(239, 68, 68, 0.3)' : 'var(--color-bg-tertiary, #333)',
+            border: showFormants ? '1px solid #ef4444' : '1px solid transparent',
+            borderRadius: '4px',
+            color: showFormants ? '#ef4444' : 'var(--color-text-muted, #888)',
+            cursor: 'pointer',
+          }}
+        >
+          F1-F4
+        </button>
+        <button
+          type="button"
+          onClick={() => setShowPitch(!showPitch)}
+          aria-label="Toggle pitch"
+          style={{
+            padding: '4px 8px',
+            fontSize: '11px',
+            backgroundColor: showPitch ? 'rgba(59, 130, 246, 0.3)' : 'var(--color-bg-tertiary, #333)',
+            border: showPitch ? '1px solid #3b82f6' : '1px solid transparent',
+            borderRadius: '4px',
+            color: showPitch ? '#3b82f6' : 'var(--color-text-muted, #888)',
+            cursor: 'pointer',
+          }}
+        >
+          F0
+        </button>
       </div>
     </div>
   );

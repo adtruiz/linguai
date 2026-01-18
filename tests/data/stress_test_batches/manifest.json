@@ -1,0 +1,272 @@
+{
+  "generated": "2026-01-17T15:38:57.718891",
+  "total_files": 48,
+  "total_size_mb": 94.99,
+  "batches": {
+    "batch_1_extended_duration": {
+      "file_count": 4,
+      "files": [
+        {
+          "name": "extended_30_seconds.wav",
+          "path": "data/stress_test_batches/batch_1/extended_30_seconds.wav",
+          "size_kb": 2584.03
+        },
+        {
+          "name": "extended_1_minute.wav",
+          "path": "data/stress_test_batches/batch_1/extended_1_minute.wav",
+          "size_kb": 5168.01
+        },
+        {
+          "name": "extended_5_minutes.wav",
+          "path": "data/stress_test_batches/batch_1/extended_5_minutes.wav",
+          "size_kb": 25839.89
+        },
+        {
+          "name": "extended_10_minutes.wav",
+          "path": "data/stress_test_batches/batch_1/extended_10_minutes.wav",
+          "size_kb": 51679.73
+        }
+      ]
+    },
+    "batch_2_format_variety": {
+      "file_count": 9,
+      "files": [
+        {
+          "name": "sample_rate_8000hz.wav",
+          "path": "data/stress_test_batches/batch_2/sample_rate_8000hz.wav",
+          "size_kb": 78.17
+        },
+        {
+          "name": "sample_rate_16000hz.wav",
+          "path": "data/stress_test_batches/batch_2/sample_rate_16000hz.wav",
+          "size_kb": 156.29
+        },
+        {
+          "name": "sample_rate_22050hz.wav",
+          "path": "data/stress_test_batches/batch_2/sample_rate_22050hz.wav",
+          "size_kb": 215.38
+        },
+        {
+          "name": "sample_rate_44100hz.wav",
+          "path": "data/stress_test_batches/batch_2/sample_rate_44100hz.wav",
+          "size_kb": 430.71
+        },
+        {
+          "name": "sample_rate_48000hz.wav",
+          "path": "data/stress_test_batches/batch_2/sample_rate_48000hz.wav",
+          "size_kb": 468.79
+        },
+        {
+          "name": "sample_rate_96000hz.wav",
+          "path": "data/stress_test_batches/batch_2/sample_rate_96000hz.wav",
+          "size_kb": 937.54
+        },
+        {
+          "name": "channels_mono.wav",
+          "path": "data/stress_test_batches/batch_2/channels_mono.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "channels_stereo.wav",
+          "path": "data/stress_test_batches/batch_2/channels_stereo.wav",
+          "size_kb": 516.84
+        },
+        {
+          "name": "bit_depth_8bit.wav",
+          "path": "data/stress_test_batches/batch_2/bit_depth_8bit.wav",
+          "size_kb": 129.24
+        }
+      ]
+    },
+    "batch_3_phonetic_patterns": {
+      "file_count": 11,
+      "files": [
+        {
+          "name": "vowel_inventory.wav",
+          "path": "data/stress_test_batches/batch_3/vowel_inventory.wav",
+          "size_kb": 516.84
+        },
+        {
+          "name": "vowel_i_sustained.wav",
+          "path": "data/stress_test_batches/batch_3/vowel_i_sustained.wav",
+          "size_kb": 86.18
+        },
+        {
+          "name": "vowel_ae_sustained.wav",
+          "path": "data/stress_test_batches/batch_3/vowel_ae_sustained.wav",
+          "size_kb": 86.18
+        },
+        {
+          "name": "vowel_ah_sustained.wav",
+          "path": "data/stress_test_batches/batch_3/vowel_ah_sustained.wav",
+          "size_kb": 86.18
+        },
+        {
+          "name": "vowel_u_sustained.wav",
+          "path": "data/stress_test_batches/batch_3/vowel_u_sustained.wav",
+          "size_kb": 86.18
+        },
+        {
+          "name": "fricative_inventory.wav",
+          "path": "data/stress_test_batches/batch_3/fricative_inventory.wav",
+          "size_kb": 241.21
+        },
+        {
+          "name": "stop_consonant_inventory.wav",
+          "path": "data/stress_test_batches/batch_3/stop_consonant_inventory.wav",
+          "size_kb": 222.26
+        },
+        {
+          "name": "mandarin_tones.wav",
+          "path": "data/stress_test_batches/batch_3/mandarin_tones.wav",
+          "size_kb": 241.21
+        },
+        {
+          "name": "diphthong_ai.wav",
+          "path": "data/stress_test_batches/batch_3/diphthong_ai.wav",
+          "size_kb": 34.5
+        },
+        {
+          "name": "intonation_question_rising.wav",
+          "path": "data/stress_test_batches/batch_3/intonation_question_rising.wav",
+          "size_kb": 86.18
+        },
+        {
+          "name": "intonation_statement_falling.wav",
+          "path": "data/stress_test_batches/batch_3/intonation_statement_falling.wav",
+          "size_kb": 86.18
+        }
+      ]
+    },
+    "batch_4_edge_cases": {
+      "file_count": 14,
+      "files": [
+        {
+          "name": "very_quiet_signal.wav",
+          "path": "data/stress_test_batches/batch_4/very_quiet_signal.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "clipped_distorted.wav",
+          "path": "data/stress_test_batches/batch_4/clipped_distorted.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "silence_gaps.wav",
+          "path": "data/stress_test_batches/batch_4/silence_gaps.wav",
+          "size_kb": 344.57
+        },
+        {
+          "name": "background_babble.wav",
+          "path": "data/stress_test_batches/batch_4/background_babble.wav",
+          "size_kb": 430.71
+        },
+        {
+          "name": "snr_30db.wav",
+          "path": "data/stress_test_batches/batch_4/snr_30db.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "snr_20db.wav",
+          "path": "data/stress_test_batches/batch_4/snr_20db.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "snr_10db.wav",
+          "path": "data/stress_test_batches/batch_4/snr_10db.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "snr_5db.wav",
+          "path": "data/stress_test_batches/batch_4/snr_5db.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "snr_0db.wav",
+          "path": "data/stress_test_batches/batch_4/snr_0db.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "dc_offset.wav",
+          "path": "data/stress_test_batches/batch_4/dc_offset.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "very_short_50ms.wav",
+          "path": "data/stress_test_batches/batch_4/very_short_50ms.wav",
+          "size_kb": 4.35
+        },
+        {
+          "name": "frequency_sweep.wav",
+          "path": "data/stress_test_batches/batch_4/frequency_sweep.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "impulse_train.wav",
+          "path": "data/stress_test_batches/batch_4/impulse_train.wav",
+          "size_kb": 172.31
+        },
+        {
+          "name": "amplitude_modulated.wav",
+          "path": "data/stress_test_batches/batch_4/amplitude_modulated.wav",
+          "size_kb": 258.44
+        }
+      ]
+    },
+    "batch_5_clinical_research": {
+      "file_count": 10,
+      "files": [
+        {
+          "name": "breathy_voice.wav",
+          "path": "data/stress_test_batches/batch_5/breathy_voice.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "creaky_voice_vocal_fry.wav",
+          "path": "data/stress_test_batches/batch_5/creaky_voice_vocal_fry.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "voice_with_jitter.wav",
+          "path": "data/stress_test_batches/batch_5/voice_with_jitter.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "voice_with_shimmer.wav",
+          "path": "data/stress_test_batches/batch_5/voice_with_shimmer.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "child_speech_pattern.wav",
+          "path": "data/stress_test_batches/batch_5/child_speech_pattern.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "elderly_voice_tremor.wav",
+          "path": "data/stress_test_batches/batch_5/elderly_voice_tremor.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "sustained_a_clinical.wav",
+          "path": "data/stress_test_batches/batch_5/sustained_a_clinical.wav",
+          "size_kb": 258.44
+        },
+        {
+          "name": "maximum_phonation_time.wav",
+          "path": "data/stress_test_batches/batch_5/maximum_phonation_time.wav",
+          "size_kb": 861.37
+        },
+        {
+          "name": "diadochokinetic_pataka.wav",
+          "path": "data/stress_test_batches/batch_5/diadochokinetic_pataka.wav",
+          "size_kb": 400.51
+        },
+        {
+          "name": "reading_passage_prosody.wav",
+          "path": "data/stress_test_batches/batch_5/reading_passage_prosody.wav",
+          "size_kb": 430.71
+        }
+      ]
+    }
+  }
+}

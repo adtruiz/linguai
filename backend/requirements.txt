@@ -6,6 +6,7 @@ python-multipart>=0.0.18
 # Audio processing
 praat-parselmouth>=0.4.4
 numpy>=1.26.0
+# Note: ffmpeg must be installed separately for MP3/FLAC/OGG support
 
 # Database
 sqlalchemy>=2.0.36

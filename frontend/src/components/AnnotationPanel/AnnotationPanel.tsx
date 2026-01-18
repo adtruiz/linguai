@@ -1,10 +1,11 @@
 import { useState, useCallback, useMemo } from 'react';
 import { Tier } from './Tier';
-import type { Annotation } from '../../types/api';
+import type { Annotation, TierConfig } from '../../types/api';
 
 interface AnnotationPanelProps {
   annotations: Annotation[];
   tierNames: string[];
+  tierConfigs?: TierConfig[];  // Optional tier type configuration
   duration: number;
   zoomLevel: number;
   scrollX: number;
@@ -12,13 +13,14 @@ interface AnnotationPanelProps {
   onAnnotationSelect?: (annotation: Annotation | null) => void;
   onAnnotationUpdate?: (id: string, updates: Partial<Annotation>) => void;
   onAnnotationDelete?: (id: string) => void;
-  onAnnotationCreate?: (tier: string, start: number, end: number) => void;
-  onAddTier?: (name: string) => void;
+  onAnnotationCreate?: (tier: string, start: number, end: number, type: 'interval' | 'point') => void;
+  onAddTier?: (name: string, type: 'interval' | 'point') => void;
 }
 
 export function AnnotationPanel({
   annotations,
   tierNames,
+  tierConfigs = [],
   duration,
   zoomLevel,
   scrollX,
@@ -31,7 +33,14 @@ export function AnnotationPanel({
 }: AnnotationPanelProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [newTierName, setNewTierName] = useState('');
+  const [newTierType, setNewTierType] = useState<'interval' | 'point'>('interval');
   const [isAddingTier, setIsAddingTier] = useState(false);
+
+  // Get tier type from config or default to interval
+  const getTierType = useCallback((tierName: string): 'interval' | 'point' => {
+    const config = tierConfigs.find((c) => c.name === tierName);
+    return config?.type ?? 'interval';
+  }, [tierConfigs]);
 
   const pixelsPerSecond = useMemo(() => {
     if (duration <= 0) return 100; // Default value to avoid Infinity
@@ -73,8 +82,8 @@ export function AnnotationPanel({
   );
 
   const handleCreateAnnotation = useCallback(
-    (tier: string, start: number, end: number) => {
-      onAnnotationCreate?.(tier, start, end);
+    (tier: string, start: number, end: number, type: 'interval' | 'point') => {
+      onAnnotationCreate?.(tier, start, end, type);
     },
     [onAnnotationCreate]
   );
@@ -82,11 +91,12 @@ export function AnnotationPanel({
   const handleAddTier = useCallback(() => {
     const name = newTierName.trim();
     if (name && !tierNames.includes(name)) {
-      onAddTier?.(name);
+      onAddTier?.(name, newTierType);
       setNewTierName('');
+      setNewTierType('interval');
       setIsAddingTier(false);
     }
-  }, [newTierName, tierNames, onAddTier]);
+  }, [newTierName, newTierType, tierNames, onAddTier]);
 
   if (!duration) {
     return null;
@@ -98,6 +108,7 @@ export function AnnotationPanel({
         <Tier
           key={tier.name}
           name={tier.name}
+          tierType={getTierType(tier.name)}
           annotations={tier.annotations}
           pixelsPerSecond={pixelsPerSecond}
           scrollOffset={scrollX}
@@ -123,6 +134,14 @@ export function AnnotationPanel({
               placeholder="Tier name"
               style={{ padding: '4px 8px', fontSize: '13px', border: '1px solid var(--color-border, #333)', borderRadius: '4px', backgroundColor: 'var(--color-bg-secondary, #1a1a1a)', color: 'var(--color-text, #fff)' }}
             />
+            <select
+              value={newTierType}
+              onChange={(e) => setNewTierType(e.target.value as 'interval' | 'point')}
+              style={{ padding: '4px 8px', fontSize: '13px', border: '1px solid var(--color-border, #333)', borderRadius: '4px', backgroundColor: 'var(--color-bg-secondary, #1a1a1a)', color: 'var(--color-text, #fff)' }}
+            >
+              <option value="interval">Interval</option>
+              <option value="point">Point</option>
+            </select>
             <button type="button" onClick={handleAddTier} style={{ padding: '4px 12px', fontSize: '13px', backgroundColor: 'var(--color-primary, #3b82f6)', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
               Add
             </button>

@@ -6,7 +6,7 @@ FastAPI application for acoustic analysis powered by Parselmouth.
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import health, analyze
+from app.api import health, analyze, textgrid
 
 app = FastAPI(
     title="LinguAI API",
@@ -32,6 +32,7 @@ app.add_middleware(
 # Include routers
 app.include_router(health.router, tags=["Health"])
 app.include_router(analyze.router, prefix="/api/v1", tags=["Analysis"])
+app.include_router(textgrid.router, prefix="/api/v1", tags=["TextGrid"])
 
 
 @app.get("/")

@@ -1,0 +1,118 @@
+{
+  "timestamp": "20260117_151401",
+  "total_tests": 11,
+  "passed": 11,
+  "failed": 0,
+  "skipped": 0,
+  "errors": 0,
+  "duration_ms": 16520.41006088257,
+  "results": [
+    {
+      "name": "A1: Health endpoint",
+      "phase": "A",
+      "status": "PASS",
+      "duration_ms": 0.6768703460693359,
+      "message": "",
+      "details": {}
+    },
+    {
+      "name": "A2: Spectrogram analysis",
+      "phase": "A",
+      "status": "PASS",
+      "duration_ms": 154.0980339050293,
+      "message": "",
+      "details": {
+        "frames": 399,
+        "freq_bins": 116
+      }
+    },
+    {
+      "name": "A3: Formant analysis",
+      "phase": "A",
+      "status": "PASS",
+      "duration_ms": 24.451732635498047,
+      "message": "",
+      "details": {
+        "frames": 296,
+        "f1_count": 296
+      }
+    },
+    {
+      "name": "A4: Pitch analysis",
+      "phase": "A",
+      "status": "PASS",
+      "duration_ms": 3.9892196655273438,
+      "message": "",
+      "details": {
+        "avg_pitch": 100.01302210456153
+      }
+    },
+    {
+      "name": "A5: Error handling (invalid file)",
+      "phase": "A",
+      "status": "PASS",
+      "duration_ms": 7.108926773071289,
+      "message": "",
+      "details": {
+        "error_status": 500
+      }
+    },
+    {
+      "name": "B1: TypeScript compilation",
+      "phase": "B",
+      "status": "PASS",
+      "duration_ms": 1731.4560413360596,
+      "message": "",
+      "details": {}
+    },
+    {
+      "name": "B2: Required components exist",
+      "phase": "B",
+      "status": "PASS",
+      "duration_ms": 0.13303756713867188,
+      "message": "",
+      "details": {
+        "component_count": 7
+      }
+    },
+    {
+      "name": "C1: Backend ready with Parselmouth",
+      "phase": "C",
+      "status": "PASS",
+      "duration_ms": 2.2611618041992188,
+      "message": "",
+      "details": {}
+    },
+    {
+      "name": "C2: Full spectrogram workflow",
+      "phase": "C",
+      "status": "PASS",
+      "duration_ms": 31.461000442504883,
+      "message": "",
+      "details": {
+        "duration": 3.0,
+        "frames": 599
+      }
+    },
+    {
+      "name": "D1: Long file (10s) processing",
+      "phase": "D",
+      "status": "PASS",
+      "duration_ms": 106.02307319641113,
+      "message": "",
+      "details": {
+        "processing_time_ms": 106.02307319641113
+      }
+    },
+    {
+      "name": "D2: Silent file handling",
+      "phase": "D",
+      "status": "PASS",
+      "duration_ms": 4.104852676391602,
+      "message": "",
+      "details": {
+        "voiced_frames": 0
+      }
+    }
+  ]
+}

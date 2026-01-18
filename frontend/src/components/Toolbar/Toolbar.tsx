@@ -1,13 +1,17 @@
 import { useCallback, useRef } from 'react';
+import type { ImportResult } from '../../utils/importParsers';
 
 interface ToolbarProps {
   onFileOpen?: (file: File) => void;
+  onAnnotationImport?: (result: ImportResult) => void;
   onExport?: (format: 'textgrid' | 'json' | 'csv') => void;
+  onImageExport?: (format: 'png' | 'svg') => void;
   hasFile?: boolean;
 }
 
-export function Toolbar({ onFileOpen, onExport, hasFile = false }: ToolbarProps) {
+export function Toolbar({ onFileOpen, onAnnotationImport, onExport, onImageExport, hasFile = false }: ToolbarProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const annotationInputRef = useRef<HTMLInputElement>(null);
 
   const handleOpenClick = useCallback(async () => {
     if (window.electronAPI) {
@@ -41,6 +45,25 @@ export function Toolbar({ onFileOpen, onExport, hasFile = false }: ToolbarProps)
     [onFileOpen]
   );
 
+  const handleAnnotationImport = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      try {
+        const content = await file.text();
+        const { parseAnnotationFile } = await import('../../utils/importParsers');
+        const result = parseAnnotationFile(content, file.name);
+        onAnnotationImport?.(result);
+      } catch (error) {
+        console.error('Failed to parse annotation file:', error);
+        alert(`Failed to import annotations: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
+      e.target.value = '';
+    },
+    [onAnnotationImport]
+  );
+
   const handleExport = useCallback(
     (format: 'textgrid' | 'json' | 'csv') => {
       onExport?.(format);
@@ -55,6 +78,13 @@ export function Toolbar({ onFileOpen, onExport, hasFile = false }: ToolbarProps)
         type="file"
         accept="audio/*,.wav,.mp3,.flac,.ogg,.m4a"
         onChange={handleFileChange}
+        style={{ display: 'none' }}
+      />
+      <input
+        ref={annotationInputRef}
+        type="file"
+        accept=".TextGrid,.textgrid,.eaf,.xml"
+        onChange={handleAnnotationImport}
         style={{ display: 'none' }}
       />
 
@@ -72,30 +102,82 @@ export function Toolbar({ onFileOpen, onExport, hasFile = false }: ToolbarProps)
         Open Audio
       </button>
 
+      <button
+        type="button"
+        onClick={() => annotationInputRef.current?.click()}
+        style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', fontSize: '13px', backgroundColor: 'var(--color-bg-tertiary, #333)', color: 'var(--color-text, #fff)', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+        title="Import TextGrid or ELAN annotations"
+      >
+        Import Annotations
+      </button>
+
       {hasFile && (
-        <select
-          onChange={(e) => {
-            const format = e.target.value as 'textgrid' | 'json' | 'csv';
-            if (format) {
-              handleExport(format);
-              e.target.value = '';
-            }
-          }}
-          style={{ padding: '6px 12px', fontSize: '13px', backgroundColor: 'var(--color-bg-tertiary, #333)', color: 'var(--color-text, #fff)', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-          defaultValue=""
-        >
-          <option value="" disabled>Export As...</option>
-          <option value="textgrid">TextGrid (Praat)</option>
-          <option value="json">JSON</option>
-          <option value="csv">CSV</option>
-        </select>
+        <>
+          <select
+            onChange={(e) => {
+              const format = e.target.value as 'textgrid' | 'json' | 'csv';
+              if (format) {
+                handleExport(format);
+                e.target.value = '';
+              }
+            }}
+            style={{ padding: '6px 12px', fontSize: '13px', backgroundColor: 'var(--color-bg-tertiary, #333)', color: 'var(--color-text, #fff)', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+            defaultValue=""
+          >
+            <option value="" disabled>Export Annotations...</option>
+            <option value="textgrid">TextGrid (Praat)</option>
+            <option value="json">JSON</option>
+            <option value="csv">CSV</option>
+          </select>
+
+          <select
+            onChange={(e) => {
+              const format = e.target.value as 'png' | 'svg';
+              if (format) {
+                onImageExport?.(format);
+                e.target.value = '';
+              }
+            }}
+            style={{ padding: '6px 12px', fontSize: '13px', backgroundColor: 'var(--color-bg-tertiary, #333)', color: 'var(--color-text, #fff)', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+            defaultValue=""
+          >
+            <option value="" disabled>Export Image...</option>
+            <option value="png">PNG (High Resolution)</option>
+            <option value="svg">SVG (Vector)</option>
+          </select>
+        </>
       )}
 
       <div style={{ flex: 1 }} />
 
       <button
         type="button"
-        onClick={() => alert('Keyboard shortcuts:\n\nSpace: Play/Pause\n← →: Skip 5 seconds\nCtrl/Cmd + scroll: Zoom\nShift + scroll: Pan\nDouble-click tier: Create annotation\nDouble-click segment: Edit text')}
+        onClick={() => alert(`Keyboard shortcuts:
+
+Playback:
+  Space: Play/Pause
+  P: Play selection (loops)
+  ← →: Seek 0.1s
+  Home/End: Go to start/end
+
+Selection:
+  Shift + ← →: Extend selection
+  Esc: Clear selection
+  F: Zoom to selection
+
+Navigation:
+  [ ]: Previous/next boundary
+  Ctrl + +/-: Zoom in/out
+  Ctrl + 0: Fit to view
+  Ctrl/Cmd + scroll: Zoom
+  Shift + scroll: Pan
+
+Annotation:
+  Ctrl + Enter: Create annotation
+  Ctrl + Z: Undo
+  Ctrl + Shift + Z: Redo
+  Double-click tier: Create annotation
+  Double-click segment: Edit text`)}
         style={{ padding: '6px 12px', fontSize: '13px', backgroundColor: 'transparent', color: 'var(--color-text-muted, #888)', border: '1px solid var(--color-border, #333)', borderRadius: '4px', cursor: 'pointer' }}
       >
         Shortcuts

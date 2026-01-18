@@ -1,0 +1,47 @@
+{
+  "duration": 3.0,
+  "tiers": [
+    {
+      "name": "phonemes",
+      "tier_type": "interval",
+      "annotations": [
+        {
+          "id": "1",
+          "start": 0.0,
+          "end": 0.5,
+          "text": "h"
+        },
+        {
+          "id": "2",
+          "start": 0.5,
+          "end": 0.8,
+          "text": "\u025b"
+        },
+        {
+          "id": "3",
+          "start": 0.8,
+          "end": 1.2,
+          "text": "l"
+        },
+        {
+          "id": "4",
+          "start": 1.2,
+          "end": 1.6,
+          "text": "o\u028a"
+        }
+      ]
+    },
+    {
+      "name": "words",
+      "tier_type": "interval",
+      "annotations": [
+        {
+          "id": "5",
+          "start": 0.0,
+          "end": 1.6,
+          "text": "hello"
+        }
+      ]
+    }
+  ]
+}

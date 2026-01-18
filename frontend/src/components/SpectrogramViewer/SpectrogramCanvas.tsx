@@ -1,8 +1,12 @@
 import { useRef, useEffect, useCallback, useMemo } from 'react';
-import type { SpectrogramResponse } from '../../types/api';
+import type { SpectrogramResponse, FormantResponse, PitchResponse } from '../../types/api';
 
 interface SpectrogramCanvasProps {
   data: SpectrogramResponse;
+  formantData?: FormantResponse | null;
+  pitchData?: PitchResponse | null;
+  showFormants?: boolean;
+  showPitch?: boolean;
   width: number;
   height: number;
   zoomLevel: number;
@@ -16,6 +20,10 @@ interface SpectrogramCanvasProps {
 
 export function SpectrogramCanvas({
   data,
+  formantData,
+  pitchData,
+  showFormants = true,
+  showPitch = true,
   width,
   height,
   zoomLevel,
@@ -116,6 +124,87 @@ export function SpectrogramCanvas({
       ctx.fillRect(x1, 0, x2 - x1, height);
     }
 
+    // Max frequency from spectrogram data (for mapping Hz to pixels)
+    const maxFreq = data.frequencies[data.frequencies.length - 1] || 5000;
+
+    // Helper to convert frequency to Y pixel position
+    const freqToY = (freq: number) => {
+      const ratio = freq / maxFreq;
+      return height - ratio * height;
+    };
+
+    // Draw formant dots (F1-F4)
+    if (showFormants && formantData) {
+      const formantColors = {
+        f1: '#ef4444', // red
+        f2: '#f97316', // orange
+        f3: '#eab308', // yellow
+        f4: '#84cc16', // lime
+      };
+
+      const formants = [
+        { key: 'f1' as const, data: formantData.f1 },
+        { key: 'f2' as const, data: formantData.f2 },
+        { key: 'f3' as const, data: formantData.f3 },
+        { key: 'f4' as const, data: formantData.f4 },
+      ];
+
+      for (const formant of formants) {
+        ctx.fillStyle = formantColors[formant.key];
+        for (let i = 0; i < formantData.times.length; i++) {
+          const freq = formant.data[i];
+          if (freq === null || freq === undefined || freq <= 0 || freq > maxFreq) continue;
+
+          const x = timeToX(formantData.times[i]);
+          if (x < -5 || x > width + 5) continue;
+
+          const y = freqToY(freq);
+          ctx.beginPath();
+          ctx.arc(x, y, 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+
+    // Draw pitch contour
+    if (showPitch && pitchData) {
+      ctx.strokeStyle = '#3b82f6'; // blue
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+
+      // Scale pitch to fit in the spectrogram view
+      // Typical F0 range: 50-500 Hz, map to lower portion of display
+      const pitchMin = 50;
+      const pitchMax = 500;
+      const pitchToY = (pitch: number) => {
+        const clampedPitch = Math.max(pitchMin, Math.min(pitch, pitchMax));
+        const ratio = (clampedPitch - pitchMin) / (pitchMax - pitchMin);
+        // Map to bottom 40% of display to avoid overlap with higher formants
+        return height - ratio * (height * 0.4);
+      };
+
+      let isFirstPoint = true;
+      for (let i = 0; i < pitchData.times.length; i++) {
+        const freq = pitchData.frequencies[i];
+        if (freq === null || freq === undefined || freq <= 0) {
+          isFirstPoint = true;
+          continue;
+        }
+
+        const x = timeToX(pitchData.times[i]);
+        if (x < -5 || x > width + 5) continue;
+
+        const y = pitchToY(freq);
+        if (isFirstPoint) {
+          ctx.moveTo(x, y);
+          isFirstPoint = false;
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+      ctx.stroke();
+    }
+
     // Draw playhead
     const playheadX = timeToX(playheadPosition);
     if (playheadX >= 0 && playheadX <= width) {
@@ -126,7 +215,7 @@ export function SpectrogramCanvas({
       ctx.lineTo(playheadX, height);
       ctx.stroke();
     }
-  }, [spectrogramImage, width, height, zoomLevel, scrollX, playheadPosition, selectionStart, selectionEnd, timeToX]);
+  }, [spectrogramImage, data.frequencies, width, height, zoomLevel, scrollX, playheadPosition, selectionStart, selectionEnd, timeToX, showFormants, formantData, showPitch, pitchData]);
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {

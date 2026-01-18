@@ -24,8 +24,9 @@ export function Segment({
   const [editText, setEditText] = useState(annotation.text);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const isPoint = annotation.type === 'point' || annotation.start === annotation.end;
   const left = annotation.start * pixelsPerSecond - scrollOffset;
-  const width = (annotation.end - annotation.start) * pixelsPerSecond;
+  const width = isPoint ? 0 : (annotation.end - annotation.start) * pixelsPerSecond;
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -68,8 +69,96 @@ export function Segment({
   );
 
   // Don't render if fully off-screen
-  if (left + width < 0) return null;
+  if (left + width < 0 && left < 0) return null;
 
+  // Point annotation rendering
+  if (isPoint) {
+    return (
+      <div
+        onClick={handleClick}
+        onDoubleClick={handleDoubleClick}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        style={{
+          position: 'absolute',
+          left: `${left - 6}px`,
+          width: '12px',
+          height: '100%',
+          cursor: 'pointer',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          zIndex: isSelected ? 10 : 1,
+        }}
+      >
+        {/* Vertical line */}
+        <div
+          style={{
+            position: 'absolute',
+            left: '5px',
+            top: 0,
+            width: '2px',
+            height: '100%',
+            backgroundColor: isSelected ? '#ef4444' : '#f97316',
+          }}
+        />
+        {/* Diamond marker */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%) rotate(45deg)',
+            width: '8px',
+            height: '8px',
+            backgroundColor: isSelected ? '#ef4444' : '#f97316',
+            border: '1px solid rgba(0,0,0,0.3)',
+          }}
+        />
+        {/* Label on hover or when selected */}
+        {(isSelected || annotation.text) && (
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '2px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              fontSize: '10px',
+              color: 'var(--color-text, #fff)',
+              backgroundColor: 'rgba(0,0,0,0.7)',
+              padding: '1px 4px',
+              borderRadius: '2px',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {isEditing ? (
+              <input
+                ref={inputRef}
+                value={editText}
+                onChange={(e) => setEditText(e.target.value)}
+                onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
+                style={{
+                  width: '60px',
+                  padding: '1px 2px',
+                  fontSize: '10px',
+                  border: 'none',
+                  borderRadius: '2px',
+                  backgroundColor: 'white',
+                  color: 'black',
+                  textAlign: 'center',
+                }}
+              />
+            ) : (
+              annotation.text || '•'
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Interval annotation rendering
   return (
     <div
       onClick={handleClick}

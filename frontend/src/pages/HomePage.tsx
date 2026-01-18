@@ -1,9 +1,15 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { Toolbar } from '../components/Toolbar';
 import { SpectrogramViewer } from '../components/SpectrogramViewer';
+import { WaveformViewer } from '../components/WaveformViewer';
 import { AnnotationPanel } from '../components/AnnotationPanel';
 import { AudioPlayer } from '../components/AudioPlayer';
-import type { Annotation } from '../types/api';
+import type { AudioPlayerRef } from '../components/AudioPlayer';
+import { IPAKeyboard } from '../components/IPAKeyboard';
+import { captureViewport } from '../utils/exportImage';
+import type { ImportResult } from '../utils/importParsers';
+import { useKeyboardShortcuts, useUndoRedo } from '../hooks';
+import type { Annotation, TierConfig } from '../types/api';
 
 function HomePage() {
   const [audioFile, setAudioFile] = useState<File | null>(null);
@@ -11,11 +17,22 @@ function HomePage() {
   const [currentTime, setCurrentTime] = useState(0);
   const [selectionStart, setSelectionStart] = useState<number | null>(null);
   const [selectionEnd, setSelectionEnd] = useState<number | null>(null);
-  const [annotations, setAnnotations] = useState<Annotation[]>([]);
+  const {
+    state: annotations,
+    set: setAnnotations,
+    undo: undoAnnotation,
+    redo: redoAnnotation,
+    reset: resetAnnotations,
+    canUndo,
+    canRedo,
+  } = useUndoRedo<Annotation[]>([]);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [scrollX, setScrollX] = useState(0);
   const [tierNames, setTierNames] = useState<string[]>([]);
+  const [tierConfigs, setTierConfigs] = useState<TierConfig[]>([]);
+  const [showIPAKeyboard, setShowIPAKeyboard] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const audioPlayerRef = useRef<AudioPlayerRef>(null);
   const [containerWidth, setContainerWidth] = useState(800);
 
   useEffect(() => {
@@ -32,14 +49,15 @@ function HomePage() {
 
   const handleFileOpen = useCallback((file: File) => {
     setAudioFile(file);
-    setAnnotations([]);
+    resetAnnotations([]);
     setTierNames([]);
+    setTierConfigs([]);
     setCurrentTime(0);
     setSelectionStart(null);
     setSelectionEnd(null);
     setZoomLevel(1);
     setScrollX(0);
-  }, []);
+  }, [resetAnnotations]);
 
   const handleSelectionChange = useCallback((start: number, end: number) => {
     if (start === end) {
@@ -51,16 +69,17 @@ function HomePage() {
     }
   }, []);
 
-  const handleAnnotationCreate = useCallback((tier: string, start: number, end: number) => {
+  const handleAnnotationCreate = useCallback((tier: string, start: number, end: number, type: 'interval' | 'point' = 'interval') => {
     const newAnnotation: Annotation = {
       id: crypto.randomUUID(),
       tier,
       start,
       end,
       text: '',
+      type,
     };
     setAnnotations((prev) => [...prev, newAnnotation]);
-  }, []);
+  }, [setAnnotations]);
 
   const handleAnnotationUpdate = useCallback((id: string, updates: Partial<Annotation>) => {
     setAnnotations((prev) => prev.map((a) => (a.id === id ? { ...a, ...updates } : a)));
@@ -70,9 +89,158 @@ function HomePage() {
     setAnnotations((prev) => prev.filter((a) => a.id !== id));
   }, []);
 
-  const handleAddTier = useCallback((name: string) => {
+  const handleAddTier = useCallback((name: string, type: 'interval' | 'point' = 'interval') => {
     setTierNames((prev) => (prev.includes(name) ? prev : [...prev, name]));
+    setTierConfigs((prev) => {
+      // Only add if not already configured
+      if (prev.find((c) => c.name === name)) return prev;
+      return [...prev, { name, type }];
+    });
   }, []);
+
+  const handleImageExport = useCallback((format: 'png' | 'svg') => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const filename = audioFile ? audioFile.name.replace(/\.[^.]+$/, '') : 'linguai-export';
+    captureViewport(container, {
+      format,
+      filename,
+      scale: format === 'png' ? 2 : 1,
+      backgroundColor: '#1a1a1a',
+    });
+  }, [audioFile]);
+
+  const handleAnnotationImport = useCallback((result: ImportResult) => {
+    // Merge imported annotations with existing ones
+    setAnnotations((prev) => [...prev, ...result.annotations]);
+
+    // Merge tier configs
+    setTierConfigs((prev) => {
+      const existingNames = new Set(prev.map((c) => c.name));
+      const newConfigs = result.tierConfigs.filter((c) => !existingNames.has(c.name));
+      return [...prev, ...newConfigs];
+    });
+
+    // Add tier names
+    setTierNames((prev) => {
+      const existingNames = new Set(prev);
+      const newNames = result.tierConfigs.map((c) => c.name).filter((n) => !existingNames.has(n));
+      return [...prev, ...newNames];
+    });
+
+    // Update duration if imported is longer (useful when importing without audio)
+    if (result.duration > duration) {
+      setDuration(result.duration);
+    }
+  }, [duration, setAnnotations]);
+
+  const handleIPASymbolClick = useCallback((symbol: string) => {
+    // Try to insert into active element if it's an input
+    const activeElement = document.activeElement;
+    if (activeElement instanceof HTMLInputElement || activeElement instanceof HTMLTextAreaElement) {
+      const start = activeElement.selectionStart ?? 0;
+      const end = activeElement.selectionEnd ?? 0;
+      const value = activeElement.value;
+      activeElement.value = value.slice(0, start) + symbol + value.slice(end);
+      activeElement.selectionStart = activeElement.selectionEnd = start + symbol.length;
+      // Trigger input event for React
+      activeElement.dispatchEvent(new Event('input', { bubbles: true }));
+    } else {
+      // Copy to clipboard as fallback
+      navigator.clipboard.writeText(symbol).catch(() => {});
+    }
+  }, []);
+
+  // Merge explicit tiers with tiers derived from annotations (moved before keyboard shortcuts)
+  const allTiers = [...new Set([...tierNames, ...annotations.map((a) => a.tier)])];
+
+  // Find next/previous annotation boundary for navigation
+  const findBoundaries = useCallback(() => {
+    const boundaries = new Set<number>();
+    annotations.forEach((a) => {
+      boundaries.add(a.start);
+      boundaries.add(a.end);
+    });
+    return Array.from(boundaries).sort((a, b) => a - b);
+  }, [annotations]);
+
+  // Keyboard shortcuts
+  useKeyboardShortcuts({
+    enabled: !!audioFile,
+    onPlayPause: () => audioPlayerRef.current?.togglePlay(),
+    onSeekForward: (amount) => audioPlayerRef.current?.seekBy(amount),
+    onSeekBackward: (amount) => audioPlayerRef.current?.seekBy(-amount),
+    onGoToStart: () => audioPlayerRef.current?.goToStart(),
+    onGoToEnd: () => audioPlayerRef.current?.goToEnd(),
+    onPlaySelection: () => audioPlayerRef.current?.playSelection(),
+    onZoomIn: () => setZoomLevel((z) => Math.min(z * 1.5, 100)),
+    onZoomOut: () => setZoomLevel((z) => Math.max(z / 1.5, 0.1)),
+    onFitToView: () => {
+      setZoomLevel(1);
+      setScrollX(0);
+    },
+    onZoomToSelection: () => {
+      if (selectionStart !== null && selectionEnd !== null && selectionStart !== selectionEnd && duration > 0) {
+        const selectionDuration = Math.abs(selectionEnd - selectionStart);
+        // Calculate zoom to fit selection with 10% padding
+        const targetZoom = (duration / selectionDuration) * 0.9;
+        const newZoom = Math.max(1, Math.min(targetZoom, 100));
+        setZoomLevel(newZoom);
+        // Calculate scroll to position selection at left with padding
+        const pixelsPerSecond = (containerWidth * newZoom) / duration;
+        const selectionStartPx = Math.min(selectionStart, selectionEnd) * pixelsPerSecond;
+        const padding = containerWidth * 0.05;
+        setScrollX(Math.max(0, selectionStartPx - padding));
+      }
+    },
+    onClearSelection: () => {
+      setSelectionStart(null);
+      setSelectionEnd(null);
+    },
+    onPreviousBoundary: () => {
+      const boundaries = findBoundaries();
+      const prev = boundaries.filter((b) => b < currentTime - 0.01).pop();
+      if (prev !== undefined) setCurrentTime(prev);
+    },
+    onNextBoundary: () => {
+      const boundaries = findBoundaries();
+      const next = boundaries.find((b) => b > currentTime + 0.01);
+      if (next !== undefined) setCurrentTime(next);
+    },
+    onExtendSelectionLeft: () => {
+      if (selectionStart === null) {
+        setSelectionStart(currentTime);
+        setSelectionEnd(currentTime);
+      } else {
+        setSelectionStart((s) => Math.max(0, (s ?? currentTime) - 0.05));
+      }
+    },
+    onExtendSelectionRight: () => {
+      if (selectionEnd === null) {
+        setSelectionStart(currentTime);
+        setSelectionEnd(currentTime);
+      } else {
+        setSelectionEnd((e) => Math.min(duration, (e ?? currentTime) + 0.05));
+      }
+    },
+    onCreateAnnotation: () => {
+      if (selectionStart !== null && selectionEnd !== null && allTiers.length > 0) {
+        handleAnnotationCreate(allTiers[0], selectionStart, selectionEnd);
+      }
+    },
+    onDeleteAnnotation: () => {
+      // Delete annotation at current time (if any)
+      const atTime = annotations.find(
+        (a) => a.start <= currentTime && a.end >= currentTime
+      );
+      if (atTime) {
+        handleAnnotationDelete(atTime.id);
+      }
+    },
+    onUndo: canUndo ? undoAnnotation : undefined,
+    onRedo: canRedo ? redoAnnotation : undefined,
+  });
 
   const handleExport = useCallback(
     (format: 'textgrid' | 'json' | 'csv') => {
@@ -142,15 +310,28 @@ function HomePage() {
     [annotations, duration, tierNames]
   );
 
-  // Merge explicit tiers with tiers derived from annotations
-  const allTiers = [...new Set([...tierNames, ...annotations.map((a) => a.tier)])];
-
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--color-bg, #0a0a0a)', color: 'var(--color-text, #fff)' }}>
-      <Toolbar onFileOpen={handleFileOpen} onExport={handleExport} hasFile={!!audioFile} />
+      <Toolbar onFileOpen={handleFileOpen} onAnnotationImport={handleAnnotationImport} onExport={handleExport} onImageExport={handleImageExport} hasFile={!!audioFile} />
 
-      <div ref={containerRef} style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', overflow: 'hidden' }}>
-        <div style={{ flex: '0 0 256px' }}>
+      <div ref={containerRef} style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px', padding: '16px', overflow: 'hidden' }}>
+        {/* Waveform View */}
+        <div style={{ flex: '0 0 80px' }}>
+          <WaveformViewer
+            file={audioFile}
+            currentTime={currentTime}
+            zoomLevel={zoomLevel}
+            scrollX={scrollX}
+            selectionStart={selectionStart}
+            selectionEnd={selectionEnd}
+            onTimeChange={setCurrentTime}
+            onSelectionChange={handleSelectionChange}
+            height={80}
+          />
+        </div>
+
+        {/* Spectrogram View */}
+        <div style={{ flex: '0 0 220px' }}>
           <SpectrogramViewer
             file={audioFile}
             currentTime={currentTime}
@@ -169,6 +350,7 @@ function HomePage() {
           <AnnotationPanel
             annotations={annotations}
             tierNames={allTiers}
+            tierConfigs={tierConfigs}
             duration={duration}
             zoomLevel={zoomLevel}
             scrollX={scrollX}
@@ -182,6 +364,7 @@ function HomePage() {
 
         <div style={{ flexShrink: 0 }}>
           <AudioPlayer
+            ref={audioPlayerRef}
             file={audioFile}
             currentTime={currentTime}
             selectionStart={selectionStart}
@@ -191,6 +374,40 @@ function HomePage() {
           />
         </div>
       </div>
+
+      {/* IPA Keyboard Toggle Button */}
+      <button
+        type="button"
+        onClick={() => setShowIPAKeyboard((prev) => !prev)}
+        title="Toggle IPA Keyboard"
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          width: '48px',
+          height: '48px',
+          borderRadius: '50%',
+          backgroundColor: showIPAKeyboard ? 'var(--color-primary, #3b82f6)' : 'var(--color-bg-tertiary, #2a2a2a)',
+          border: '1px solid var(--color-border, #333)',
+          color: 'var(--color-text, #fff)',
+          fontSize: '20px',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+          zIndex: 999,
+        }}
+      >
+        ipa
+      </button>
+
+      {/* IPA Keyboard */}
+      <IPAKeyboard
+        isOpen={showIPAKeyboard}
+        onClose={() => setShowIPAKeyboard(false)}
+        onSymbolClick={handleIPASymbolClick}
+      />
     </div>
   );
 }
