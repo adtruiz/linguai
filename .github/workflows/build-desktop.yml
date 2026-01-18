@@ -51,23 +51,17 @@ jobs:
       - name: Build Electron app (macOS)
         if: matrix.platform == 'mac'
         working-directory: frontend
-        run: npx electron-builder --mac --universal
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx electron-builder --mac --universal --publish never
 
       - name: Build Electron app (Windows)
         if: matrix.platform == 'win'
         working-directory: frontend
-        run: npx electron-builder --win --x64
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx electron-builder --win --x64 --publish never
 
       - name: Build Electron app (Linux)
         if: matrix.platform == 'linux'
         working-directory: frontend
-        run: npx electron-builder --linux --x64
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx electron-builder --linux --x64 --publish never
 
       - name: Upload macOS artifacts
         if: matrix.platform == 'mac'
