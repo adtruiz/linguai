@@ -2,7 +2,15 @@
   "name": "@linguai/frontend",
   "version": "0.1.0",
   "description": "AI-native acoustic analysis platform for phoneticians and linguists",
-  "author": "LinguAI Team",
+  "author": {
+    "name": "LinguAI Team",
+    "email": "team@linguai.app"
+  },
+  "homepage": "https://linguai.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adtruiz/linguai"
+  },
   "private": true,
   "type": "module",
   "main": "electron/main.js",
